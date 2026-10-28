@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Course-to-Career Pathfinder | Career Connections</title>
+  <meta name="description" content="High school students enter their coursework, pick an occupation, and see O*NET requirements, knowledge gaps, typical training after graduation, and AP or dual credit that may already count.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/brand.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <a class="skip" href="#report">Skip to report</a>
+
+  <header class="brandbar">
+    <div class="brandbar-inner">
+      <a class="brand" href="./" aria-label="Career Connections home">
+        <!-- Drop the official logo at assets/logo.svg (or change the src). If the file is missing, the text wordmark shows instead. -->
+        <img class="brand-logo" id="brandLogo" src="assets/logo.svg" alt="Diamondback Energy">
+        <span class="brand-word" hidden>Diamondback Energy</span>
+      </a>
+      <span class="brand-program">Career Connections</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <span class="eyebrow">Planning tool</span>
+      <h1>Course-to-Career Pathfinder</h1>
+      <p class="lede">Add the classes you've taken or are taking, pick an occupation, and see how your coursework lines up with what O*NET says the job requires, plus what you'd likely study after high school.</p>
+    </section>
+
+    <div class="app">
+      <section class="pane no-print" aria-label="Your coursework">
+        <div class="panel">
+          <div class="panel-head"><h2>Drop in your courses</h2><span class="hint">Paste from a transcript or schedule</span></div>
+          <label class="sr-only" for="paste">Course list</label>
+          <textarea id="paste" placeholder="One course per line, e.g.&#10;English II&#10;Algebra II&#10;AP Biology&#10;Dual Credit ENGL 1301&#10;Welding I"></textarea>
+          <div class="row">
+            <button class="btn" id="matchBtn" type="button">Match my courses</button>
+            <button class="btn ghost" id="clearBtn" type="button">Clear all</button>
+          </div>
+          <p class="unmatched" id="unmatched" role="status" hidden></p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Your coursework</h2><span class="hint" id="selCount"></span></div>
+          <div class="banner" id="sampleBanner" hidden>
+            <span>Showing an <strong>example student</strong> so you can see how it works.</span>
+            <button class="btn ghost" id="startOwn" type="button">Start with my own</button>
+          </div>
+          <div id="groups"></div>
+        </div>
+
+        <div class="panel" id="apPanel" hidden>
+          <div class="panel-head"><h2>AP exam scores</h2><span class="hint">Optional</span></div>
+          <p class="hint">Texas public colleges generally give credit for a 3 or higher. Leave it blank if you haven't tested yet.</p>
+          <div class="scores" id="scores"></div>
+        </div>
+      </section>
+
+      <section class="pane" id="report" aria-label="Report" tabindex="-1">
+        <div class="panel occ-pick no-print">
+          <label for="occ">Occupation</label>
+          <select id="occ"></select>
+          <span class="hint">Grouped by O*NET Job Zone, which measures how much preparation a job needs.</span>
+          <div class="row">
+            <button class="btn ghost" id="printBtn" type="button">Print or save as PDF</button>
+          </div>
+        </div>
+
+        <div class="panel print-only" id="printCourses"></div>
+        <div class="panel occ-card" id="occCard"></div>
+        <div class="panel" id="knowCard"></div>
+        <div class="panel" id="pathCard"></div>
+        <div class="panel" id="creditCard"></div>
+        <div class="panel" id="nextCard"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>How to read this.</strong> Occupation requirements (Job Zone, education levels, knowledge areas and their order) come from O*NET OnLine. The match between high school courses and O*NET knowledge areas, the typical post-high-school coursework, and college course equivalents are planning estimates. Every college, program, and apprenticeship sets its own rules, so confirm credit and prerequisites with the school before counting on them.</p>
+      <p>This site includes information from <a href="https://www.onetonline.org/" target="_blank" rel="noopener">O*NET OnLine</a> by the U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). Used under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> license. O*NET® is a trademark of USDOL/ETA. Career Connections has modified all or some of this information: O*NET descriptions are shortened, and the course matching, training paths, and college credit sections are added content. USDOL/ETA has not approved, endorsed, or tested these modifications.</p>
+      <details class="sources no-print">
+        <summary>Sources</summary>
+        <ul id="sources"></ul>
+      </details>
+      <p class="fine">Diamondback Energy · Career Connections</p>
+    </div>
+  </footer>
+
+  <script src="js/data-courses.js" defer></script>
+  <script src="js/data-occupations.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

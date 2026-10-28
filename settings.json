@@ -1,0 +1,8 @@
+{
+  // Live Server serves the App folder, so "Go Live" opens the real app.
+  "liveServer.settings.root": "/App",
+  "liveServer.settings.port": 5500,
+  "files.exclude": {
+    "**/.DS_Store": true
+  }
+}

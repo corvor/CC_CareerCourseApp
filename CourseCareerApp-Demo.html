@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Course-to-Career Pathfinder | Career Connections (Preview)</title>
+  <meta name="description" content="High school students enter their coursework, pick an occupation, and see O*NET requirements, knowledge gaps, typical training after graduation, and AP or dual credit that may already count.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+/* =====================================================================
+   BRAND THEME — the only file to edit to change colors and fonts.
+   Values below are placeholders chosen to suit an energy-company look.
+   Replace them with Diamondback Energy's official brand values
+   (ask Corporate Communications / Marketing for the brand guide).
+   ===================================================================== */
+:root{
+  /* Brand */
+  --brand-primary:#0F2A44;      /* header band, primary buttons  — REPLACE with official primary */
+  --brand-primary-ink:#FFFFFF;  /* text on the header band */
+  --brand-accent:#B5322A;       /* highlights, focus ring, callout rules — REPLACE with official accent */
+
+  /* Page neutrals */
+  --paper:#F3F5F7;
+  --surface:#FFFFFF;
+  --ink:#0F1E2C;
+  --muted:#566576;
+  --line:#D4DCE4;
+
+  /* Interactive (derived from brand primary) */
+  --accent:#1B4A75;
+  --accent-soft:#E2EBF4;
+
+  /* Status colors (good / partial / gap) — keep these readable, not brand */
+  --ok:#1E7A4C;  --ok-soft:#E1F2E8;
+  --mid:#A8690E; --mid-soft:#FBEFD9;
+  --gap:#B0412C; --gap-soft:#F8E4DF;
+
+  /* Type */
+  --f-display:"Barlow", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* Dark mode follows the visitor's device setting */
+@media (prefers-color-scheme: dark){
+  :root{
+    --brand-primary:#0B1F33;
+    --brand-primary-ink:#F2F5F8;
+    --brand-accent:#E2685E;
+    --paper:#0D1620; --surface:#14212E; --ink:#E6ECF2; --muted:#97A6B6; --line:#283A4C;
+    --accent:#7FB0E0; --accent-soft:#18324A;
+    --ok:#62C893; --ok-soft:#173327;
+    --mid:#E6AE55; --mid-soft:#36290F;
+    --gap:#EE8570; --gap-soft:#3A1F19;
+    color-scheme:dark;
+  }
+}
+
+/* Layout and components. Colors and fonts come from brand.css. */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,4.2vw,44px);font-weight:700;letter-spacing:-.005em}
+h2{font-size:22px;font-weight:700}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+:focus-visible{outline:3px solid var(--brand-accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--surface);padding:8px 12px;z-index:20}
+.skip:focus{left:max(16px,env(safe-area-inset-left,0px))}
+
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Brand band */
+.brandbar{background:var(--brand-primary);color:var(--brand-primary-ink);border-bottom:4px solid var(--brand-accent);padding-top:env(safe-area-inset-top,0px)}
+.brandbar-inner{max-width:1240px;margin:0 auto;padding-block:14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;color:inherit;text-decoration:none}
+.brand-logo{height:36px;width:auto;display:block}
+.brand-word{font-family:var(--f-display);font-weight:700;font-size:20px;letter-spacing:.06em;text-transform:uppercase}
+.brand-program{font-family:var(--f-display);font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+
+.intro{display:flex;flex-direction:column;gap:6px;padding-block:28px 22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);max-width:68ch;margin-top:6px;font-size:17px}
+
+.app{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start;padding-bottom:48px}
+@media (min-width:960px){.app{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+.pane{display:flex;flex-direction:column;gap:18px;min-width:0}
+.pane:focus{outline:none}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.hint{font-size:14px;color:var(--muted)}
+
+textarea{width:100%;min-height:120px;resize:vertical;font:14px/1.45 var(--f-mono);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:10px}
+select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;max-width:100%}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--brand-primary);background:var(--brand-primary);color:var(--brand-primary-ink);border-radius:6px;padding:8px 16px;font-weight:600}
+.btn:hover{filter:brightness(1.15)}
+.btn.ghost{background:transparent;color:var(--accent);border-color:var(--accent)}
+
+.banner{background:var(--accent-soft);border-radius:6px;padding:10px 12px;font-size:15px;display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.unmatched{font-size:14px;color:var(--muted)}
+.unmatched code{font-family:var(--f-mono);background:var(--paper);padding:1px 5px;border-radius:4px}
+
+details.group{border-top:1px solid var(--line);padding-top:10px}
+details.group:first-of-type{border-top:0;padding-top:0}
+details.group summary{cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;list-style:none;gap:8px}
+details.group summary::-webkit-details-marker{display:none}
+details.group summary::after{content:"+";font-family:var(--f-mono);color:var(--muted)}
+details.group[open] summary::after{content:"–"}
+.count{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-left:auto}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:5px 12px;font-size:14px;line-height:1.3}
+.chip[aria-pressed="true"]{background:var(--brand-primary);border-color:var(--brand-primary);color:var(--brand-primary-ink)}
+.scores{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;font-size:15px}
+
+/* Report */
+.occ-pick{display:flex;flex-direction:column;gap:6px}
+.occ-pick label{font-weight:600}
+.occ-card{display:grid;gap:14px}
+.occ-title{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.soc{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.zone{display:flex;flex-direction:column;gap:6px}
+.zone-meter,.zone-scale{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;max-width:360px}
+.zone-meter span{height:10px;border-radius:2px;background:var(--line)}
+.zone-meter span.on{background:var(--brand-primary)}
+.zone-scale{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.facts{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+@media (min-width:640px){.facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.fact h3{font-size:12.5px;font-family:var(--f-mono);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.edu-row{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:6px;align-items:center;font-size:15px}
+.edu-bar{grid-column:1/-1;height:6px;background:var(--paper);border-radius:3px;overflow:hidden;margin-bottom:4px}
+.edu-bar i{display:block;height:100%;background:var(--accent)}
+.pct{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;font-size:13px}
+
+.strip{display:flex;gap:3px;height:12px;border-radius:3px;overflow:hidden}
+.strip span{flex:1}
+.s-ok{background:var(--ok)} .s-mid{background:var(--mid)} .s-gap{background:var(--gap)}
+.tally{display:flex;gap:16px;flex-wrap:wrap;font-size:15px}
+.tally b{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.k-list{display:flex;flex-direction:column}
+.k{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 0;border-top:1px solid var(--line)}
+.k:first-child{border-top:0}
+.k-name{font-weight:600;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.k-imp{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-weight:400}
+.k-detail{grid-column:1/-1;font-size:15px;color:var(--muted)}
+.k-detail strong{color:var(--ink);font-weight:600}
+.pill{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:3px 9px;white-space:nowrap;align-self:start}
+.p-ok{background:var(--ok-soft);color:var(--ok)} .p-mid{background:var(--mid-soft);color:var(--mid)} .p-gap{background:var(--gap-soft);color:var(--gap)} .p-na{background:var(--paper);color:var(--muted)}
+
+.path-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.path-len{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+ol.steps{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+ol.steps li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:9px 0;border-top:1px dashed var(--line);font-size:15.5px}
+ol.steps li:first-child{border-top:0}
+@media (max-width:480px){ol.steps li{grid-template-columns:minmax(0,1fr)} ol.steps .pill{justify-self:start;white-space:normal}}
+.note{font-size:14px;color:var(--muted);border-left:3px solid var(--brand-accent);padding-left:10px}
+
+.core{display:grid;gap:8px}
+.core-row{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:4px 10px;align-items:center;font-size:15px}
+.core-bar{grid-column:1/-1;display:flex;height:8px;background:var(--paper);border-radius:4px;overflow:hidden}
+.core-bar i{display:block;height:100%}
+.core-bar .have{background:var(--ok)} .core-bar .maybe{background:var(--mid);opacity:.55}
+.core-total{font-family:var(--f-display);font-size:30px;font-weight:700}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:11.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td.mono{font-family:var(--f-mono);font-size:13px}
+
+ul.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:15.5px}
+.empty{color:var(--muted);font-size:15px}
+
+.site-footer{border-top:1px solid var(--line);background:var(--surface);font-size:14px;color:var(--muted)}
+.footer-inner{display:flex;flex-direction:column;gap:10px;padding-block:24px calc(32px + env(safe-area-inset-bottom,0px));max-width:1240px}
+.footer-inner p{max-width:95ch}
+.sources summary{cursor:pointer;font-weight:600;color:var(--ink)}
+.sources ul{margin:8px 0 0;padding-left:18px;columns:2 280px}
+.fine{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+
+.print-only{display:none}
+@media (prefers-reduced-motion:no-preference){.edu-bar i,.core-bar i{transition:width .3s ease}}
+
+/* Print: report only, with the student's course list */
+@media print{
+  :root{--paper:#fff;--surface:#fff;--ink:#000;--muted:#333;--line:#bbb;color-scheme:light}
+  body{font-size:11pt}
+  .no-print,.skip{display:none!important}
+  .print-only{display:flex!important}
+  .app{display:block}
+  .panel{border:0;padding:0 0 12pt;break-inside:avoid-page}
+  .brandbar{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .strip,.pill,.core-bar,.edu-bar,.zone-meter{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:9pt;color:#555}
+}
+
+</style>
+</head>
+<body>
+<div style="background:var(--mid-soft);color:var(--ink);font:600 13px/1.4 var(--f-body);padding:8px max(16px,env(safe-area-inset-left,0px));text-align:center;border-bottom:1px solid var(--line)">Prototype demo · placeholder colors and logo · not the live site</div>
+
+  <a class="skip" href="#report">Skip to report</a>
+
+  <header class="brandbar">
+    <div class="brandbar-inner">
+      <a class="brand" href="./" aria-label="Career Connections home">
+        <!-- Drop the official logo at assets/logo.svg (or change the src). If the file is missing, the text wordmark shows instead. -->
+        <img class="brand-logo" id="brandLogo" src="assets/logo.svg" alt="Diamondback Energy">
+        <span class="brand-word" hidden>Diamondback Energy</span>
+      </a>
+      <span class="brand-program">Career Connections</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <span class="eyebrow">Planning tool</span>
+      <h1>Course-to-Career Pathfinder</h1>
+      <p class="lede">Add the classes you've taken or are taking, pick an occupation, and see how your coursework lines up with what O*NET says the job requires, plus what you'd likely study after high school.</p>
+    </section>
+
+    <div class="app">
+      <section class="pane no-print" aria-label="Your coursework">
+        <div class="panel">
+          <div class="panel-head"><h2>Drop in your courses</h2><span class="hint">Paste from a transcript or schedule</span></div>
+          <label class="sr-only" for="paste">Course list</label>
+          <textarea id="paste" placeholder="One course per line, e.g.&#10;English II&#10;Algebra II&#10;AP Biology&#10;Dual Credit ENGL 1301&#10;Welding I"></textarea>
+          <div class="row">
+            <button class="btn" id="matchBtn" type="button">Match my courses</button>
+            <button class="btn ghost" id="clearBtn" type="button">Clear all</button>
+          </div>
+          <p class="unmatched" id="unmatched" role="status" hidden></p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Your coursework</h2><span class="hint" id="selCount"></span></div>
+          <div class="banner" id="sampleBanner" hidden>
+            <span>Showing an <strong>example student</strong> so you can see how it works.</span>
+            <button class="btn ghost" id="startOwn" type="button">Start with my own</button>
+          </div>
+          <div id="groups"></div>
+        </div>
+
+        <div class="panel" id="apPanel" hidden>
+          <div class="panel-head"><h2>AP exam scores</h2><span class="hint">Optional</span></div>
+          <p class="hint">Texas public colleges generally give credit for a 3 or higher. Leave it blank if you haven't tested yet.</p>
+          <div class="scores" id="scores"></div>
+        </div>
+      </section>
+
+      <section class="pane" id="report" aria-label="Report" tabindex="-1">
+        <div class="panel occ-pick no-print">
+          <label for="occ">Occupation</label>
+          <select id="occ"></select>
+          <span class="hint">Grouped by O*NET Job Zone, which measures how much preparation a job needs.</span>
+          <div class="row">
+            <button class="btn ghost" id="printBtn" type="button">Print or save as PDF</button>
+          </div>
+        </div>
+
+        <div class="panel print-only" id="printCourses"></div>
+        <div class="panel occ-card" id="occCard"></div>
+        <div class="panel" id="knowCard"></div>
+        <div class="panel" id="pathCard"></div>
+        <div class="panel" id="creditCard"></div>
+        <div class="panel" id="nextCard"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>How to read this.</strong> Occupation requirements (Job Zone, education levels, knowledge areas and their order) come from O*NET OnLine. The match between high school courses and O*NET knowledge areas, the typical post-high-school coursework, and college course equivalents are planning estimates. Every college, program, and apprenticeship sets its own rules, so confirm credit and prerequisites with the school before counting on them.</p>
+      <p>This site includes information from <a href="https://www.onetonline.org/" target="_blank" rel="noopener">O*NET OnLine</a> by the U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). Used under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> license. O*NET® is a trademark of USDOL/ETA. Career Connections has modified all or some of this information: O*NET descriptions are shortened, and the course matching, training paths, and college credit sections are added content. USDOL/ETA has not approved, endorsed, or tested these modifications.</p>
+      <details class="sources no-print">
+        <summary>Sources</summary>
+        <ul id="sources"></ul>
+      </details>
+      <p class="fine">Diamondback Energy · Career Connections</p>
+    </div>
+  </footer>
+<script>
+/* Course catalog: Texas-style high school course names.
+   Each course:
+     id   unique key
+     g    index into GROUPS (which list it appears under)
+     n    display name
+     t    "AP" or "DC" (dual credit), optional
+     re   pattern used to recognize the course in pasted text. Text is lowercased,
+          punctuation removed, and Roman numerals turned into digits first
+          ("Algebra II" -> "algebra 2").
+     kn   O*NET knowledge areas this course builds: 1 = intro, 2 = core, 3 = advanced
+     cr   typical college credit (AP courses need a score of 3+). tags link to
+          occupation path items; core = Texas Core Curriculum component.
+   See docs/UPDATING-DATA.md before editing. */
+/* ---------- O*NET knowledge areas ---------- */
+const K = {
+  EN:"English Language", MA:"Mathematics", PH:"Physics", CH:"Chemistry", BI:"Biology",
+  MD:"Medicine and Dentistry", PS:"Psychology", TC:"Therapy and Counseling",
+  CPS:"Customer and Personal Service", AM:"Administration and Management", AD:"Administrative",
+  EA:"Economics and Accounting", LG:"Law and Government", PSS:"Public Safety and Security",
+  CE:"Computers and Electronics", ET:"Engineering and Technology", DE:"Design", ME:"Mechanical",
+  BC:"Building and Construction", PP:"Production and Processing", TR:"Transportation",
+  TE:"Telecommunications", ED:"Education and Training", FA:"Fine Arts",
+  CM:"Communications and Media", GE:"Geography"
+};
+
+/* ---------- High school courses (Texas-style names) ----------
+   kn: knowledge weights (1 intro, 2 core, 3 advanced). cr: typical college credit (AP needs 3+). */
+const GROUPS = ["English & Communication","Math","Science","Social Studies","Technology","Trades & Engineering (CTE)","Health Science (CTE)","Business, Law & Education (CTE)","Arts, Languages & Other","Work & Activities"];
+const C = [
+ // English
+ {id:"dc_engl",g:0,n:"Dual Credit English (ENGL 1301/1302)",t:"DC",re:/(dual|\bdc\b|college).*(english|engl|comp)|engl ?130[12]|composition/,kn:{EN:3},cr:{tags:["comp"],hrs:6,col:"ENGL 1301 & 1302",core:"Communication"}},
+ {id:"ap_lang",g:0,n:"AP English Language",t:"AP",re:/\bap\b.*lang/,kn:{EN:3},cr:{tags:["comp"],hrs:3,col:"ENGL 1301",core:"Communication"}},
+ {id:"ap_lit",g:0,n:"AP English Literature",t:"AP",re:/\bap\b.*lit/,kn:{EN:3},cr:{tags:["comp"],hrs:3,col:"ENGL 1302 (varies)",core:"Communication"}},
+ {id:"eng1",g:0,n:"English I",re:/\b(english|eng|ela)\s*1\b/,kn:{EN:1}},
+ {id:"eng2",g:0,n:"English II",re:/\b(english|eng|ela)\s*2\b/,kn:{EN:1}},
+ {id:"eng3",g:0,n:"English III",re:/\b(english|eng|ela)\s*3\b/,kn:{EN:2}},
+ {id:"eng4",g:0,n:"English IV",re:/\b(english|eng|ela)\s*4\b/,kn:{EN:2}},
+ {id:"speech",g:0,n:"Professional Communications / Speech",re:/professional comm|communication app|speech|public speaking|debate/,kn:{EN:1,CPS:1,CM:1}},
+ // Math
+ {id:"dc_math",g:1,n:"Dual Credit College Algebra",t:"DC",re:/(dual|\bdc\b).*(alg|math)|math ?1314|college algebra/,kn:{MA:3},cr:{tags:["math"],hrs:3,col:"MATH 1314 College Algebra",core:"Mathematics"}},
+ {id:"ap_calc",g:1,n:"AP Calculus",t:"AP",re:/\bap\b.*calc/,kn:{MA:3,PH:1},cr:{tags:["calc","math"],hrs:4,col:"MATH 2413 Calculus I",core:"Mathematics"}},
+ {id:"ap_stat",g:1,n:"AP Statistics",t:"AP",re:/\bap\b.*stat/,kn:{MA:3},cr:{tags:["stats","math"],hrs:3,col:"MATH 1342 Statistics",core:"Mathematics"}},
+ {id:"alg1",g:1,n:"Algebra I",re:/\balg(ebra)?\s*1\b/,kn:{MA:1}},
+ {id:"geom",g:1,n:"Geometry",re:/geometry|\bgeom\b/,kn:{MA:1,DE:1}},
+ {id:"alg2",g:1,n:"Algebra II",re:/\balg(ebra)?\s*2\b/,kn:{MA:2}},
+ {id:"precalc",g:1,n:"Precalculus",re:/pre ?calc/,kn:{MA:3}},
+ {id:"stats",g:1,n:"Statistics",re:/statistics|\bstats?\b/,kn:{MA:2}},
+ {id:"aqr",g:1,n:"Algebraic Reasoning / AQR",re:/quantitative reasoning|\baqr\b|algebraic reasoning/,kn:{MA:1}},
+ {id:"finmath",g:1,n:"Financial Mathematics",re:/financial math/,kn:{MA:1,EA:2}},
+ // Science
+ {id:"ap_bio",g:2,n:"AP Biology",t:"AP",re:/\bap\b.*bio/,kn:{BI:3,MD:1},cr:{tags:["bio"],hrs:4,col:"BIOL 1406 Biology I",core:"Life & Physical Sciences"}},
+ {id:"ap_chem",g:2,n:"AP Chemistry",t:"AP",re:/\bap\b.*chem/,kn:{CH:3},cr:{tags:["chem"],hrs:4,col:"CHEM 1411 General Chemistry I",core:"Life & Physical Sciences"}},
+ {id:"ap_phys",g:2,n:"AP Physics",t:"AP",re:/\bap\b.*phys/,kn:{PH:3,ET:1,MA:1},cr:{tags:["phys"],hrs:4,col:"PHYS 1401 College Physics I",core:"Life & Physical Sciences"}},
+ {id:"ap_env",g:2,n:"AP Environmental Science",t:"AP",re:/\bap\b.*environ/,kn:{BI:2,CH:1,GE:1},cr:{tags:["envsci"],hrs:4,col:"ENVR 1401",core:"Life & Physical Sciences"}},
+ {id:"anat",g:2,n:"Anatomy & Physiology",re:/anatomy|physiology|\ba ?& ?p\b/,kn:{BI:2,MD:2}},
+ {id:"bio",g:2,n:"Biology",re:/\bbio(logy)?\b/,kn:{BI:2}},
+ {id:"chem",g:2,n:"Chemistry",re:/chem/,kn:{CH:2}},
+ {id:"ipc",g:2,n:"IPC (Integrated Physics & Chemistry)",re:/\bipc\b|integrated physics/,kn:{PH:1,CH:1}},
+ {id:"phys",g:2,n:"Physics",re:/physics/,kn:{PH:2,ME:1}},
+ {id:"env",g:2,n:"Environmental Systems",re:/environmental/,kn:{BI:1,GE:1}},
+ // Social studies
+ {id:"dc_ush",g:3,n:"Dual Credit US History",t:"DC",re:/(dual|\bdc\b).*hist|hist ?130[12]/,kn:{LG:1},cr:{tags:["ushist"],hrs:6,col:"HIST 1301 & 1302",core:"American History"}},
+ {id:"apush",g:3,n:"AP US History",t:"AP",re:/apush|\bap\b.*(us|u s|united states|american) hist/,kn:{LG:1},cr:{tags:["ushist"],hrs:3,col:"HIST 1301",core:"American History"}},
+ {id:"dc_gov",g:3,n:"Dual Credit Government",t:"DC",re:/(dual|\bdc\b).*gov|govt ?230[56]/,kn:{LG:2},cr:{tags:["gov"],hrs:3,col:"GOVT 2305",core:"Government/Political Science"}},
+ {id:"ap_gov",g:3,n:"AP Government",t:"AP",re:/\bap\b.*gov/,kn:{LG:3},cr:{tags:["gov"],hrs:3,col:"GOVT 2305",core:"Government/Political Science"}},
+ {id:"ap_psych",g:3,n:"AP Psychology",t:"AP",re:/\bap\b.*psych/,kn:{PS:3,TC:1},cr:{tags:["psych"],hrs:3,col:"PSYC 2301 General Psychology",core:"Social & Behavioral Sciences"}},
+ {id:"ap_hug",g:3,n:"AP Human Geography",t:"AP",re:/aphg|\bap\b.*human geo/,kn:{GE:3},cr:{tags:["soc"],hrs:3,col:"GEOG 1302 Human Geography",core:"Social & Behavioral Sciences"}},
+ {id:"ap_macro",g:3,n:"AP Macroeconomics",t:"AP",re:/\bap\b.*(macro|econ)/,kn:{EA:3},cr:{tags:["econ"],hrs:3,col:"ECON 2301 Macroeconomics",core:"Social & Behavioral Sciences"}},
+ {id:"wgeo",g:3,n:"World Geography",re:/world geo|\bgeography\b/,kn:{GE:2}},
+ {id:"whist",g:3,n:"World History",re:/world hist/,kn:{GE:1}},
+ {id:"ush",g:3,n:"US History",re:/(us|u s|united states|american) hist/,kn:{LG:1}},
+ {id:"gov",g:3,n:"Government",re:/\bgov(ernment|t)?\b/,kn:{LG:2}},
+ {id:"econ",g:3,n:"Economics",re:/econ/,kn:{EA:2}},
+ {id:"psych",g:3,n:"Psychology",re:/psych/,kn:{PS:2,TC:1}},
+ {id:"socio",g:3,n:"Sociology",re:/sociology/,kn:{PS:1}},
+ // Technology
+ {id:"ap_csa",g:4,n:"AP Computer Science A",t:"AP",re:/\bap\b.*(computer science a\b|csa\b|comp sci a\b)/,kn:{CE:3,MA:1},cr:{tags:["cs"],hrs:4,col:"COSC 1436 Programming I",core:null}},
+ {id:"ap_csp",g:4,n:"AP Computer Science Principles",t:"AP",re:/\bap\b.*(principles|csp\b)/,kn:{CE:2},cr:{tags:["cs0"],hrs:3,col:"COSC 1301 Intro to Computing",core:null}},
+ {id:"network",g:4,n:"Networking / Computer Maintenance",re:/network|computer maintenance|it essentials|cyber/,kn:{CE:2,TE:2}},
+ {id:"cs1",g:4,n:"Computer Science / Programming",re:/computer science|programming|coding/,kn:{CE:2,MA:1}},
+ {id:"digmedia",g:4,n:"Digital Media",re:/digital media/,kn:{CE:1,CM:1,DE:1}},
+ {id:"robotics",g:4,n:"Robotics",re:/robot/,kn:{ET:2,CE:1,ME:1}},
+ // Trades & engineering
+ {id:"eng_design",g:5,n:"Engineering Design & Presentation",re:/engineering design|\bedp\b|\bcad\b/,kn:{DE:2,ET:2}},
+ {id:"engr",g:5,n:"Principles of Applied Engineering",re:/engineering/,kn:{ET:2,DE:1}},
+ {id:"arch",g:5,n:"Architectural Design",re:/architect/,kn:{DE:2,BC:1}},
+ {id:"elec",g:5,n:"Electrical Technology",re:/electric/,kn:{BC:2,ME:1,PSS:1}},
+ {id:"hvac",g:5,n:"HVAC & Refrigeration Technology",re:/hvac|refrigeration|air condition/,kn:{BC:2,ME:2,PSS:1}},
+ {id:"constr",g:5,n:"Construction Technology",re:/construction|carpentry|building trades/,kn:{BC:3,PSS:1,MA:1}},
+ {id:"weld",g:5,n:"Welding",re:/weld/,kn:{PP:3,ME:1,PSS:1}},
+ {id:"diesel",g:5,n:"Diesel Equipment Technology",re:/diesel/,kn:{ME:3,TR:2}},
+ {id:"auto",g:5,n:"Automotive Technology",re:/automotive|auto tech|\bauto\b|collision/,kn:{ME:3,TR:1,CE:1}},
+ {id:"agmech",g:5,n:"Ag Mechanics & Metal Technologies",re:/ag mech|agricultural mech|metal tech|ag power|agricultural power/,kn:{ME:2,PP:2}},
+ {id:"mfg",g:5,n:"Manufacturing / Machining",re:/manufactur|machining/,kn:{PP:2,ME:1}},
+ // Health
+ {id:"cna",g:6,n:"Practicum in Health Science / CNA",re:/\bcna\b|nurse aide|nursing assist|practicum in health/,kn:{MD:2,CPS:2,PSS:1}},
+ {id:"emt",g:6,n:"EMT",re:/\bemt\b|emergency medical/,kn:{MD:2,PSS:2,CPS:1}},
+ {id:"hs_theory",g:6,n:"Health Science Theory / Clinical",re:/health science (theory|clinical)/,kn:{MD:2,CPS:1,TC:1}},
+ {id:"hs_prin",g:6,n:"Principles of Health Science",re:/principles of health|health science/,kn:{MD:1,CPS:1}},
+ {id:"medterm",g:6,n:"Medical Terminology",re:/medical term/,kn:{MD:2,EN:1}},
+ {id:"pharm",g:6,n:"Pharmacy Technician",re:/pharmac/,kn:{MD:2,CH:1}},
+ // Business, law, education
+ {id:"bim",g:7,n:"Business Information Management",re:/business information|\bbim\b/,kn:{AD:2,CE:1}},
+ {id:"acct",g:7,n:"Accounting",re:/accounting/,kn:{EA:3,AD:1}},
+ {id:"entre",g:7,n:"Entrepreneurship",re:/entrepreneur/,kn:{AM:2,EA:1}},
+ {id:"bus",g:7,n:"Principles of Business / Marketing",re:/business|marketing/,kn:{AM:1,CPS:1}},
+ {id:"law_enf",g:7,n:"Law Enforcement / Criminal Justice",re:/law enforcement|criminal|forensic|court system/,kn:{LG:2,PSS:2}},
+ {id:"law_prin",g:7,n:"Principles of Law & Public Safety",re:/principles of law|public safety/,kn:{LG:1,PSS:1}},
+ {id:"instr",g:7,n:"Instructional Practices / Child Development",re:/instructional practices|child (development|guidance)|human growth/,kn:{ED:2,PS:1}},
+ {id:"edu",g:7,n:"Principles of Education & Training",re:/principles of education|education and training/,kn:{ED:1}},
+ // Arts, languages, other
+ {id:"graphic",g:8,n:"Graphic Design & Illustration",re:/graphic design|illustration|animation/,kn:{DE:2,FA:1,CE:1}},
+ {id:"av",g:8,n:"Audio/Video Production",re:/audio|video|broadcast|\bfilm\b/,kn:{CM:2,CE:1}},
+ {id:"journal",g:8,n:"Journalism / Yearbook",re:/journalism|yearbook|newspaper/,kn:{CM:2,EN:1}},
+ {id:"art",g:8,n:"Art",re:/\bart\b|drawing|painting|ceramics/,kn:{FA:2,DE:1}},
+ {id:"music",g:8,n:"Band, Choir, or Orchestra",re:/band|choir|orchestra|music/,kn:{FA:2}},
+ {id:"theatre",g:8,n:"Theatre",re:/theat|drama/,kn:{FA:1,CM:1}},
+ {id:"lote",g:8,n:"World Language (Spanish, ASL…)",re:/spanish|french|german|\basl\b|sign language|latin|chinese/,kn:{CPS:1}},
+ {id:"health",g:8,n:"Health",re:/\bhealth\b/,kn:{MD:1}},
+ {id:"pe",g:8,n:"PE / Athletics",re:/\bpe\b|physical ed|athletic/,kn:{}},
+ // Work & activities
+ {id:"job",g:9,n:"Part-time job with customers",re:/\bjob\b|work experience|employ|cashier/,kn:{CPS:2,AM:1}},
+ {id:"vol",g:9,n:"Volunteer work",re:/volunteer/,kn:{CPS:1,ED:1}},
+ {id:"jrotc",g:9,n:"JROTC",re:/rotc/,kn:{PSS:1,AM:1}},
+ {id:"ffa",g:9,n:"FFA / 4-H project",re:/\bffa\b|4 ?h\b/,kn:{ME:1,AM:1}}
+];
+const byId = Object.fromEntries(C.map(c=>[c.id,c]));
+
+/* Occupation data. Fields marked O*NET come from O*NET OnLine profile pages
+   (https://www.onetonline.org/link/summary/<SOC>). path is a planning estimate.
+   See docs/UPDATING-DATA.md before editing. */
+/* ---------- Occupations (O*NET OnLine) ----------
+   k: knowledge areas in O*NET's listed order (imp = importance score where shown on the Details page).
+   path: typical post-high-school coursework — planning estimate, not O*NET. */
+const O = [
+ {soc:"47-5071.00",n:"Roustabouts, Oil and Gas",z:"1–2",zn:2,d:"Assembles or repairs oil field equipment using hand and power tools.",
+  edu:[["High school diploma or equivalent",null],["Less than high school diploma",null]],k:["ME","CPS"],
+  cred:"No license listed by O*NET. Employers commonly require oilfield safety training before you start.",
+  path:{type:"On-the-job training",len:"Weeks to months",deg:false,items:[["Oilfield safety orientation"],["H2S (hydrogen sulfide) awareness training"],["Equipment, rigging, and hand-tool basics"],["CDL, for some driving roles"]]}},
+ {soc:"51-4121.00",n:"Welders, Cutters, Solderers, and Brazers",z:"1–2",zn:2,d:"Joins metal parts or fills gaps and seams using hand welding, flame cutting, soldering, or brazing equipment.",
+  edu:[["High school diploma or equivalent",54],["Less than high school diploma",21],["Post-secondary certificate",12]],k:["PP","ME"],
+  cred:"O*NET lists DOL-approved registered apprenticeship titles such as Welder and Welder-Fitter.",
+  path:{type:"Certificate or apprenticeship",len:"6–12 months",deg:false,items:[["SMAW (stick) welding"],["GMAW / FCAW (MIG and flux-core)"],["GTAW (TIG) welding"],["Blueprint reading and weld symbols"],["Metallurgy basics"],["Welding certification tests (AWS)"]]}},
+ {soc:"47-2111.00",n:"Electricians",z:"3",zn:3,d:"Installs, maintains, and repairs electrical wiring, equipment, and fixtures to code.",
+  edu:[["Post-secondary certificate",62],["High school diploma or equivalent",31],["Less than high school diploma",2]],
+  k:[["BC",67],["AM",65],["ME",61],["MA",60],["DE",58],["CPS",54],["PSS",47],["PS",42]],
+  cred:"O*NET notes a 3–4 year apprenticeship or vocational training, and often a licensing exam. In Texas, electricians are licensed through TDLR.",
+  path:{type:"Registered apprenticeship or vocational program",len:"3–4 years, paid on the job",deg:false,items:[["Electrical theory and circuits"],["National Electrical Code (NEC)"],["Applied math: algebra and trig for conduit bending"],["Blueprint reading"],["Job-site safety (OSHA)"],["State licensing exam"]]}},
+ {soc:"47-2152.00",n:"Plumbers, Pipefitters, and Steamfitters",z:"3",zn:3,d:"Installs, alters, and repairs pipe systems that carry water, steam, air, or gas.",
+  edu:[["Post-secondary certificate",43],["High school diploma or equivalent",35],["Associate's degree",9]],k:["BC","ME","DE","MA","CPS","AM","ET","PH"],
+  cred:"O*NET lists 16 DOL-approved apprenticeship titles, including Plumber and Pipe Fitter. In Texas, plumbers are licensed by the State Board of Plumbing Examiners.",
+  path:{type:"Registered apprenticeship",len:"4–5 years, paid on the job",deg:false,items:[["Plumbing code"],["Pipe systems, fitting, and joining"],["Blueprint reading"],["Applied math"],["Job-site safety"],["State licensing exam"]]}},
+ {soc:"49-9021.00",n:"HVAC and Refrigeration Mechanics and Installers",z:"3",zn:3,d:"Installs and repairs heating, central air conditioning, and refrigeration systems.",
+  edu:[["High school diploma or equivalent",null],["Post-secondary certificate",null]],k:["BC","CPS","ME","AM","ED","MA","PSS","AD"],
+  cred:"O*NET lists 14 DOL-approved apprenticeship titles. Handling refrigerants requires federal EPA Section 608 certification; Texas licenses ACR contractors through TDLR.",
+  path:{type:"Certificate or apprenticeship",len:"6 months–2 years",deg:false,items:[["Refrigeration principles"],["Electrical fundamentals and controls"],["Heating systems"],["Ductwork and load calculation"],["EPA Section 608 certification"]]}},
+ {soc:"49-3023.00",n:"Automotive Service Technicians and Mechanics",z:"3",zn:3,d:"Diagnoses, adjusts, repairs, or overhauls automotive vehicles.",
+  edu:[["Post-secondary certificate",32],["Less than high school diploma",30],["High school diploma or equivalent",26]],k:["ME","ET","CE","CPS","EN","MA"],
+  cred:"O*NET lists ASE (National Institute for Automotive Service Excellence) as the certifying body and 18 DOL-approved apprenticeship titles.",
+  path:{type:"Certificate or associate (AAS)",len:"1–2 years",deg:false,items:[["Engine repair and performance"],["Brakes, steering, and suspension"],["Electrical systems and diagnostics"],["Heating and air conditioning"],["ASE certification exams"]]}},
+ {soc:"49-3031.00",n:"Bus and Truck Mechanics and Diesel Engine Specialists",z:"3",zn:3,d:"Diagnoses, repairs, or overhauls buses and trucks, and maintains diesel engines.",
+  edu:[["Post-secondary certificate",39],["High school diploma or equivalent",37]],k:["ME","TR","ED","EN","PSS","CE","MA","AM"],
+  cred:"O*NET lists 11 DOL-approved apprenticeship titles.",
+  path:{type:"Certificate or associate (AAS)",len:"1–2 years",deg:false,items:[["Diesel engines"],["Hydraulics"],["Truck electrical systems"],["Air brake systems"],["Preventive maintenance"],["ASE certification exams"]]}},
+ {soc:"31-9092.00",n:"Medical Assistants",z:"3",zn:3,d:"Performs administrative and certain clinical duties under a physician's direction.",
+  edu:[["Post-secondary certificate",null],["High school diploma or equivalent",null],["Some college, no degree",null]],k:["EN","CPS","MD","AD","CE","ED","PSS","TC"],
+  cred:"O*NET lists Medical Assistant as a DOL-approved apprenticeship title. Several national certifications exist; employers often prefer one.",
+  path:{type:"Certificate program",len:"9–12 months",deg:false,items:[["Medical terminology"],["Anatomy and physiology basics"],["Clinical procedures: vitals, injections, phlebotomy"],["Medical office: scheduling, billing, coding"],["National certification exam"]]}},
+ {soc:"29-2061.00",n:"Licensed Practical and Licensed Vocational Nurses",z:"3",zn:3,d:"Cares for ill, injured, or recovering patients, often under a registered nurse's supervision.",
+  edu:[["Some college, no degree",38],["Post-secondary certificate",35],["Associate's degree",16]],k:["CPS","EN","PS","MD","AM","ED","TC","MA"],
+  cred:"Licensing is required (O*NET). In Texas the license is issued by the Texas Board of Nursing after the NCLEX-PN exam.",
+  path:{type:"Vocational nursing certificate",len:"12–18 months",deg:false,items:[["Anatomy & Physiology (often a prerequisite)"],["English Composition (some programs)","comp"],["College math (some programs)","math"],["Vocational nursing courses and clinicals"],["NCLEX-PN licensing exam"]]}},
+ {soc:"29-1292.00",n:"Dental Hygienists",z:"3",zn:3,d:"Provides oral hygiene care, assesses oral health, and advises on disease prevention.",
+  edu:[["Associate's degree",75],["Professional degree",13],["Post-baccalaureate certificate",9]],k:["MD","CPS","PS"],
+  cred:"A state license is required to practice; Texas also requires passing the national board exam.",
+  path:{type:"Associate degree (AAS)",len:"About 3 years with prerequisites",deg:true,items:[["English Composition","comp"],["College Algebra","math"],["General Chemistry","chem"],["General Psychology","psych"],["Sociology or Speech","soc"],["Anatomy & Physiology I and II"],["Microbiology"],["Dental hygiene clinicals, radiology, periodontics"],["National board exam and state license"]]}},
+ {soc:"33-3051.00",n:"Police and Sheriff's Patrol Officers",z:"3",zn:3,d:"Maintains order, enforces laws, patrols, and responds to emergencies.",
+  edu:[],k:[["LG",94],["PSS",94],["CPS",83],["EN",76],["PS",75],["ED",68],["CE",58],["GE",58]],
+  cred:"In Texas, officers complete the TCOLE Basic Peace Officer Course and pass the state licensing exam.",
+  path:{type:"Police academy (college hours often preferred)",len:"About 6 months of academy",deg:false,items:[["Basic Peace Officer Course"],["Penal code and criminal procedure"],["Firearms, defensive tactics, and driving"],["Report writing"],["State licensing exam"],["College hours in criminal justice or psychology (some departments)","psych"]]}},
+ {soc:"15-1232.00",n:"Computer User Support Specialists",z:"3",zn:3,d:"Gives technical help to computer users in person, by phone, or online.",
+  edu:[["Bachelor's degree",null],["Post-secondary certificate",null],["Associate's degree",null]],k:["CE","CPS","TE","EN","ED","ME","ET","AM"],
+  cred:"O*NET lists 9 DOL-approved apprenticeship titles, such as Help Desk Technician. Entry-level IT certifications are common.",
+  path:{type:"Certificate or associate (AAS)",len:"6 months–2 years",deg:false,items:[["Intro to computing","cs0"],["Computer hardware and operating systems"],["Networking fundamentals"],["Help-desk customer service"],["Industry certification such as CompTIA A+"]]}},
+ {soc:"29-1141.00",n:"Registered Nurses",z:"4",zn:4,d:"Assesses patients, plans and carries out nursing care, and keeps medical records.",
+  edu:[["Bachelor's degree",null],["Associate's degree",null],["Post-secondary certificate",null]],
+  k:[["PS",90],["CPS",85],["MD",84],["EN",80],["AD",64],["MA",61],["TC",61],["AM",57]],
+  cred:"Licensing or registration is required (O*NET). In Texas the license comes from the Texas Board of Nursing after the NCLEX-RN exam.",
+  path:{type:"Associate (ADN) or bachelor's (BSN)",len:"2–4 years",deg:true,items:[["English Composition I and II","comp"],["College Algebra or Statistics","math"],["General Psychology","psych"],["Chemistry (many BSN programs)","chem"],["Anatomy & Physiology I and II"],["Microbiology"],["Lifespan Growth & Development"],["Nursing courses: fundamentals, pharmacology, clinical rotations"],["NCLEX-RN licensing exam"]]}},
+ {soc:"15-1252.00",n:"Software Developers",z:"4",zn:4,d:"Researches, designs, and develops computer software, and updates existing programs.",
+  edu:[["Bachelor's degree",85],["Associate's degree",5],["Master's degree",5]],k:["CE","CPS","MA","EN"],
+  cred:"No license required. O*NET lists DOL-approved apprenticeship titles such as Software Developer.",
+  path:{type:"Bachelor's in Computer Science or Software Engineering",len:"4 years",deg:true,items:[["Programming I and II","cs"],["Calculus I and II","calc"],["English Composition","comp"],["Physics (many programs)","phys"],["Discrete math"],["Data structures and algorithms"],["Databases, systems, software engineering"]]}},
+ {soc:"17-2141.00",n:"Mechanical Engineers",z:"4",zn:4,d:"Designs tools, engines, and machines, and oversees their installation and operation.",
+  edu:[["Bachelor's degree",52],["Associate's degree",29],["Post-secondary certificate",9]],k:["DE","ET","PP","ME","EN","MA","PSS","CE"],
+  cred:"A PE (Professional Engineer) license is needed to sign off on some work; the path starts with the FE exam near graduation.",
+  path:{type:"Bachelor's in Mechanical Engineering",len:"4 years",deg:true,items:[["Calculus I–III and differential equations","calc"],["Physics I and II (calculus-based)","phys"],["General Chemistry","chem"],["English Composition","comp"],["Statics, dynamics, thermodynamics"],["CAD and design projects"],["FE exam"]]}},
+ {soc:"17-2171.00",n:"Petroleum Engineers",z:"4",zn:4,d:"Designs methods to improve oil and gas extraction and oversees drilling.",
+  edu:[["Bachelor's degree",72]],k:["ET","MA","CE","PH","CH"],
+  cred:"A PE license is common for senior roles; the FE exam comes first.",
+  path:{type:"Bachelor's in Petroleum Engineering",len:"4 years",deg:true,items:[["Calculus I–III and differential equations","calc"],["Physics I and II (calculus-based)","phys"],["General Chemistry","chem"],["English Composition","comp"],["Geology"],["Drilling, reservoir, and production engineering"],["FE exam"]]}},
+ {soc:"25-2021.00",n:"Elementary School Teachers",z:"4",zn:4,d:"Teaches academic and social skills to elementary students.",
+  edu:[["Bachelor's degree",78],["Master's degree",22]],k:["EN","ED","MA","CPS","PS","TC","CE","PSS"],
+  cred:"Texas public schools require a Texas educator certificate, earned through a preparation program and state exams.",
+  path:{type:"Bachelor's plus educator certification",len:"4 years",deg:true,items:[["English Composition","comp"],["Math for teachers","math"],["US History","ushist"],["Government","gov"],["Child and adolescent development","psych"],["Reading and literacy methods"],["Student teaching"],["State certification exams"]]}},
+ {soc:"13-2011.00",n:"Accountants and Auditors",z:"4",zn:4,d:"Prepares and audits financial statements and sets up budget tracking systems.",
+  edu:[["Bachelor's degree",69],["Associate's degree",7],["Post-baccalaureate certificate",7]],k:["EA","EN","MA","LG","AM","CPS","AD","CE"],
+  cred:"Becoming a CPA has extra education, exam, and experience requirements; check the Texas State Board of Public Accountancy.",
+  path:{type:"Bachelor's in Accounting",len:"4 years, more for CPA",deg:true,items:[["Macro and microeconomics","econ"],["Business statistics","stats"],["English Composition","comp"],["Financial and managerial accounting"],["Business law"],["Intermediate accounting, tax, auditing"],["CPA exam"]]}},
+ {soc:"27-1024.00",n:"Graphic Designers",z:"4",zn:4,d:"Creates graphics such as packaging, displays, and logos for business or promotion.",
+  edu:[["Bachelor's degree",65],["High school diploma or equivalent",15],["Master's degree",10]],k:["DE","CE","FA","CM","EN"],
+  cred:"No license required. A strong portfolio matters most when applying.",
+  path:{type:"Bachelor's in design (BFA or BA)",len:"4 years",deg:true,items:[["English Composition","comp"],["Design fundamentals and color"],["Typography"],["Digital imaging and layout software"],["Art and design history"],["Portfolio review"]]}},
+ {soc:"29-1123.00",n:"Physical Therapists",z:"5",zn:5,d:"Plans and carries out rehabilitation to improve mobility, relieve pain, and build strength.",
+  edu:[],k:[["CPS",90],["TC",90],["MD",89],["PS",78]],
+  cred:"O*NET Job Zone 5: most of these jobs require graduate school. Physical therapists earn a Doctor of Physical Therapy and pass a national licensing exam.",
+  path:{type:"Bachelor's, then Doctor of Physical Therapy (DPT)",len:"About 7 years",deg:true,items:[["Biology I and II","bio"],["Chemistry I and II","chem"],["Physics I and II","phys"],["General Psychology","psych"],["Statistics","stats"],["Anatomy & Physiology I and II"],["DPT program with clinical rotations"],["National licensing exam"]]}}
+];
+const ZONE_TEXT = {
+ 2:"Usually requires a high school diploma or GED, though some jobs may not.",
+ 3:"Most jobs require vocational school, related on-the-job experience, or an associate's degree.",
+ 4:"Most of these jobs require a four-year bachelor's degree, but some do not.",
+ 5:"Most of these jobs require graduate school."
+};
+const CORE = [["Communication",6],["Mathematics",3],["Life & Physical Sciences",6],["Language, Philosophy & Culture",3],["Creative Arts",3],["American History",6],["Government/Political Science",6],["Social & Behavioral Sciences",3],["Component Area Option",6]];
+const TAG_NAMES = {comp:"English Composition",math:"College math",calc:"Calculus",stats:"Statistics",bio:"Biology",chem:"Chemistry",phys:"Physics",psych:"Psychology",soc:"Social science",econ:"Economics",ushist:"US History",gov:"Government",cs:"Programming",cs0:"Intro to computing",envsci:"Environmental science"};
+
+/* Course-to-Career Pathfinder app logic. Data lives in data-courses.js and data-occupations.js. */
+/* ---------- state ---------- */
+const SAMPLE = {sel:{eng1:{},eng2:{},ap_lang:{},alg1:{},geom:{},alg2:{},bio:{},chem:{},wgeo:{},whist:{},ap_psych:{score:4},hs_prin:{},medterm:{},lote:{},job:{}},occ:"29-1141.00",sample:true};
+let S;
+try{ S = JSON.parse(localStorage.getItem("pathfinder-v1")) || null; }catch(e){ S=null; }
+if(!S || !S.sel) S = JSON.parse(JSON.stringify(SAMPLE));
+function save(){ try{ localStorage.setItem("pathfinder-v1", JSON.stringify(S)); }catch(e){} }
+
+// Drop saved courses or occupations that no longer exist in the data files
+for(const id of Object.keys(S.sel)){ if(!byId[id]) delete S.sel[id]; }
+if(!O.some(o=>o.soc===S.occ)) S.occ = O[0].soc;
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- logo fallback: show the text wordmark if assets/logo.svg is missing ---------- */
+(function(){
+  const img=$("brandLogo"); if(!img) return;
+  const fallback=()=>{ img.hidden=true; img.nextElementSibling.hidden=false; };
+  if(img.complete && img.naturalWidth===0) fallback();
+  else img.addEventListener("error",fallback);
+})();
+
+/* ---------- paste matching ---------- */
+function norm(s){
+  return (" "+s.toLowerCase().replace(/[^a-z0-9&+ ]/g," ")+" ")
+    .replace(/\biv\b/g,"4").replace(/\biii\b/g,"3").replace(/\bii\b/g,"2").replace(/\bi\b/g,"1")
+    .replace(/\s+/g," ").trim();
+}
+const MATCH_ORDER = [...C.filter(c=>c.t), ...C.filter(c=>!c.t)];
+function matchPaste(){
+  const lines = $("paste").value.split(/[\n;|\t]+|,(?=\s*[A-Za-z])/).map(l=>l.trim()).filter(l=>/[a-z]{2}/i.test(l));
+  const missed=[]; let added=0;
+  for(const line of lines){
+    const s = norm(line);
+    const hit = MATCH_ORDER.find(c=>c.re.test(s));
+    if(hit){ if(!S.sel[hit.id]){ S.sel[hit.id]={}; added++; } }
+    else missed.push(line);
+  }
+  if(S.sample){ S.sample=false; }
+  const um=$("unmatched");
+  if(lines.length===0){ um.hidden=false; um.textContent="Paste at least one course name, one per line."; }
+  else{
+    um.hidden=false;
+    um.innerHTML = `Added ${added} course${added===1?"":"s"}.` + (missed.length? ` Couldn't match: ${missed.map(m=>`<code>${esc(m)}</code>`).join(", ")}. Pick these from the lists below if they fit.`:"");
+  }
+  save(); renderAll();
+}
+
+/* ---------- left pane ---------- */
+function renderGroups(){
+  const open = new Set([...document.querySelectorAll("details.group[open]")].map(d=>d.dataset.g));
+  const first = document.querySelectorAll("details.group").length===0;
+  $("groups").innerHTML = GROUPS.map((g,gi)=>{
+    const items=C.filter(c=>c.g===gi);
+    const n=items.filter(c=>S.sel[c.id]).length;
+    const isOpen = first ? (gi<3) : open.has(String(gi));
+    return `<details class="group" data-g="${gi}" ${isOpen?"open":""}><summary>${esc(g)}<span class="count">${n?n+" selected":""}</span></summary>
+      <div class="chips">${items.map(c=>`<button type="button" class="chip" id="c-${c.id}" data-id="${c.id}" aria-pressed="${!!S.sel[c.id]}">${esc(c.n)}</button>`).join("")}</div></details>`;
+  }).join("");
+  const n=Object.keys(S.sel).length;
+  $("selCount").textContent = n ? `${n} selected` : "Nothing selected yet";
+  $("sampleBanner").hidden = !S.sample;
+  const aps = Object.keys(S.sel).filter(id=>byId[id] && byId[id].t==="AP");
+  $("apPanel").hidden = aps.length===0;
+  $("scores").innerHTML = aps.map(id=>`<label for="sc-${id}">${esc(byId[id].n)}</label>
+    <select id="sc-${id}" data-id="${id}"><option value="">No score yet</option>${[5,4,3,2,1].map(v=>`<option value="${v}" ${S.sel[id].score==v?"selected":""}>${v}</option>`).join("")}</select>`).join("");
+}
+$("groups").addEventListener("click",e=>{
+  const b=e.target.closest(".chip"); if(!b) return;
+  const id=b.dataset.id;
+  if(S.sel[id]) delete S.sel[id]; else S.sel[id]={};
+  S.sample=false; save(); renderAll();
+  const nb=$("c-"+id); if(nb) nb.focus();
+});
+$("scores").addEventListener("change",e=>{
+  const id=e.target.dataset.id; if(!id) return;
+  S.sel[id].score = e.target.value ? +e.target.value : undefined;
+  S.sample=false; save(); renderReport();
+});
+$("matchBtn").addEventListener("click",matchPaste);
+$("clearBtn").addEventListener("click",()=>{ S.sel={}; S.sample=false; $("paste").value=""; $("unmatched").hidden=true; save(); renderAll(); });
+$("startOwn").addEventListener("click",()=>{ S.sel={}; S.sample=false; save(); renderAll(); $("paste").focus(); });
+
+/* ---------- report ---------- */
+function occKnow(o){ return o.k.map(x=>Array.isArray(x)?{c:x[0],imp:x[1]}:{c:x,imp:null}); }
+function strengthFor(code){
+  let sum=0; const from=[];
+  for(const id of Object.keys(S.sel)){ const c=byId[id]; if(c && c.kn[code]){ sum+=c.kn[code]; from.push(c.n); } }
+  return {sum,from,status: sum>=3?"ok":sum>=1?"mid":"gap"};
+}
+function creditStatus(id){
+  const c=byId[id];
+  if(c.t==="DC") return {st:"have",label:"Earned (dual credit)"};
+  const sc=S.sel[id].score;
+  if(sc==null) return {st:"maybe",label:"Possible with a 3+"};
+  if(sc>=3) return {st:"have",label:`Likely (AP score ${sc})`};
+  return {st:"no",label:`Not likely (AP score ${sc})`};
+}
+function credits(){
+  return Object.keys(S.sel).filter(id=>byId[id] && byId[id].cr).map(id=>({id,c:byId[id],...creditStatus(id)}));
+}
+function tagCoverage(tag){
+  const cs=credits().filter(x=>x.c.cr.tags.includes(tag));
+  const have=cs.find(x=>x.st==="have"); if(have) return {st:"have",by:have};
+  const maybe=cs.find(x=>x.st==="maybe"); if(maybe) return {st:"maybe",by:maybe};
+  return null;
+}
+
+function renderOccSelect(){
+  const zones=[[2,"Job Zone 1–2 · little to some preparation"],[3,"Job Zone 3 · medium preparation"],[4,"Job Zone 4 · considerable preparation"],[5,"Job Zone 5 · extensive preparation"]];
+  $("occ").innerHTML = zones.map(([z,l])=>`<optgroup label="${l}">${O.filter(o=>o.zn===z).map(o=>`<option value="${o.soc}" ${o.soc===S.occ?"selected":""}>${esc(o.n)}</option>`).join("")}</optgroup>`).join("");
+}
+$("occ").addEventListener("change",e=>{ S.occ=e.target.value; save(); renderReport(); });
+
+function renderReport(){
+  const o = O.find(x=>x.soc===S.occ) || O[0];
+  const url = `https://www.onetonline.org/link/summary/${o.soc}`;
+
+  // occupation card
+  const eduHtml = o.edu.length
+    ? o.edu.map(([lvl,p])=>`<div class="edu-row"><span>${esc(lvl)}</span><span class="pct">${p!=null?p+"%":"some jobs"}</span><div class="edu-bar"><i style="width:${p!=null?p:30}%"></i></div></div>`).join("") +
+      (o.edu.some(e=>e[1]!=null)?`<p class="hint">Share of O*NET survey respondents saying new hires need this level.</p>`:`<p class="hint">O*NET lists these levels without percentages for this job.</p>`)
+    : `<p class="hint">O*NET does not publish an education breakdown on this profile. See the Job Zone description.</p>`;
+  $("occCard").innerHTML = `
+    <div class="occ-title"><h2>${esc(o.n)}</h2><span class="soc">O*NET-SOC ${o.soc}</span></div>
+    <p>${esc(o.d)}</p>
+    <div class="zone">
+      <span class="eyebrow">Job Zone ${o.z} of 5</span>
+      <div class="zone-meter" aria-hidden="true">${[1,2,3,4,5].map(i=>`<span class="${i<=o.zn?"on":""}"></span>`).join("")}</div>
+      <div class="zone-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <p class="hint">${esc(ZONE_TEXT[o.zn])}</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>Education new hires need</h3>${eduHtml}</div>
+      <div class="fact"><h3>Licenses & credentials</h3><p style="font-size:14px">${esc(o.cred)}</p></div>
+    </div>
+    <a href="${url}" target="_blank" rel="noopener">Open the full O*NET profile</a>`;
+
+  // knowledge match
+  const ks = occKnow(o).map(k=>({...k,...strengthFor(k.c)}));
+  const cnt = {ok:ks.filter(k=>k.status==="ok").length, mid:ks.filter(k=>k.status==="mid").length, gap:ks.filter(k=>k.status==="gap").length};
+  const pillTxt={ok:"Strong start",mid:"Started",gap:"Not yet"};
+  $("knowCard").innerHTML = `
+    <div class="panel-head"><h2>How your courses line up</h2><span class="hint">O*NET knowledge areas, most important first</span></div>
+    <div class="strip" role="img" aria-label="${cnt.ok} strong, ${cnt.mid} started, ${cnt.gap} not yet">${ks.map(k=>`<span class="s-${k.status}" title="${esc(K[k.c])}"></span>`).join("")}</div>
+    <div class="tally"><span><b>${cnt.ok}</b> strong start</span><span><b>${cnt.mid}</b> started</span><span><b>${cnt.gap}</b> not yet</span></div>
+    <div class="k-list">${ks.map(k=>{
+      let detail;
+      if(k.status!=="gap") detail = `<strong>From:</strong> ${k.from.map(esc).join(", ")}`;
+      else {
+        const sug = C.filter(c=>c.kn[k.c] && !S.sel[c.id]).sort((a,b)=>b.kn[k.c]-a.kn[k.c]).slice(0,3).map(c=>c.n);
+        detail = sug.length? `<strong>Builds it in high school:</strong> ${sug.map(esc).join(", ")}. You'd also pick it up in training after graduation.` : `Usually learned in training after high school.`;
+      }
+      if(k.status==="mid"){
+        const more = C.filter(c=>c.kn[k.c] && !S.sel[c.id]).sort((a,b)=>b.kn[k.c]-a.kn[k.c]).slice(0,2).map(c=>c.n);
+        if(more.length) detail += `<br><strong>To go further:</strong> ${more.map(esc).join(", ")}`;
+      }
+      return `<div class="k"><div class="k-name">${esc(K[k.c])}${k.imp!=null?`<span class="k-imp">importance ${k.imp}/100</span>`:""}</div><span class="pill p-${k.status}">${pillTxt[k.status]}</span><div class="k-detail">${detail}</div></div>`;
+    }).join("")}</div>`;
+
+  // path
+  const p=o.path;
+  $("pathCard").innerHTML = `
+    <div class="panel-head"><h2>What you'd take after high school</h2></div>
+    <div class="path-head"><h3>${esc(p.type)}</h3><span class="path-len">${esc(p.len)}</span></div>
+    <ol class="steps">${p.items.map(([name,tag])=>{
+      let pill=`<span class="pill p-na">Ahead</span>`;
+      if(tag){ const cv=tagCoverage(tag);
+        if(cv && cv.st==="have") pill=`<span class="pill p-ok">Covered: ${esc(cv.by.c.n.replace(/^Dual Credit /,"DC "))}</span>`;
+        else if(cv) pill=`<span class="pill p-mid">If ${esc(cv.by.c.n)} ≥ 3</span>`;
+      }
+      return `<li><span>${esc(name)}</span>${pill}</li>`;
+    }).join("")}</ol>
+    <p class="note">Typical coursework for this path, not an official degree plan. Programs differ, so check the specific school or apprenticeship.</p>`;
+
+  // credit
+  const cr = credits();
+  let creditHtml = `<div class="panel-head"><h2>College credit you may already have</h2></div>`;
+  if(!cr.length){
+    creditHtml += `<p class="empty">No AP or dual credit courses selected. If you take them later, they can count toward college requirements${p.deg?" for this path":" if you ever go for a degree"}.</p>`;
+  } else {
+    // core meter
+    const have={}, maybe={};
+    for(const x of cr){ const core=x.c.cr.core; if(!core) continue;
+      if(x.st==="have") have[core]=(have[core]||0)+x.c.cr.hrs;
+      else if(x.st==="maybe") maybe[core]=(maybe[core]||0)+x.c.cr.hrs; }
+    let tHave=0,tMaybe=0;
+    const rows = CORE.map(([name,hrs])=>{
+      const h=Math.min(hrs,have[name]||0), m=Math.min(hrs-h,maybe[name]||0); tHave+=h; tMaybe+=m;
+      return `<div class="core-row"><span>${esc(name)}</span><span class="pct">${h}${m?"+"+m:""} / ${hrs}</span><div class="core-bar"><i class="have" style="width:${h/hrs*100}%"></i><i class="maybe" style="width:${m/hrs*100}%"></i></div></div>`;
+    }).join("");
+    creditHtml += `
+      <div class="row" style="gap:16px;align-items:baseline"><span class="core-total">${tHave}${tMaybe?`<span style="color:var(--mid)"> +${tMaybe}</span>`:""}</span><span class="hint">of 42 Texas Core Curriculum hours. The core transfers as a block between Texas public colleges.</span></div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>Earned or likely</span><span><i style="background:var(--mid);opacity:.55"></i>Possible with an AP score of 3+</span></div>
+      <div class="core">${rows}</div>
+      ${p.deg?"":`<p class="note">This path doesn't require a degree, so core hours won't speed it up. They still count if you go back for an associate or bachelor's later.</p>`}
+      <div class="tbl-wrap"><table><thead><tr><th>Your course</th><th>Typical college equivalent</th><th>Status</th></tr></thead><tbody>
+      ${cr.map(x=>`<tr><td>${esc(x.c.n)}</td><td class="mono">${esc(x.c.cr.col)}</td><td><span class="pill ${x.st==="have"?"p-ok":x.st==="maybe"?"p-mid":"p-gap"}">${esc(x.label)}</span></td></tr>`).join("")}
+      </tbody></table></div>
+      <p class="hint">Course numbers follow the Texas Common Course Numbering System. Each college decides what an AP score or dual credit course counts for.</p>`;
+  }
+  $("creditCard").innerHTML = creditHtml;
+
+  // next steps
+  const steps=[];
+  const gaps = ks.filter(k=>k.status==="gap");
+  if(gaps.length) steps.push(`Look for classes that build <strong>${gaps.slice(0,3).map(k=>esc(K[k.c])).join(", ")}</strong> in your remaining years.`);
+  if(o.zn>=4 && !S.sel.alg2) steps.push(`Plan to take <strong>Algebra II</strong>. It's required for the Distinguished Level of Achievement, which Texas public universities use for automatic admission.`);
+  const unscored = cr.filter(x=>x.st==="maybe");
+  if(unscored.length) steps.push(`Add your AP scores when you get them. ${unscored.length===1?"That course":"Those courses"} could cover college requirements.`);
+  const wantTags = p.items.map(i=>i[1]).filter(Boolean).filter(t=>!tagCoverage(t));
+  const dcIdeas = {comp:"Dual Credit English",math:"Dual Credit College Algebra",calc:"AP Calculus",psych:"AP Psychology",chem:"AP Chemistry",bio:"AP Biology",phys:"AP Physics",ushist:"Dual Credit US History",gov:"Dual Credit Government",stats:"AP Statistics",econ:"AP Macroeconomics",cs:"AP Computer Science A",cs0:"AP Computer Science Principles",soc:"AP Human Geography"};
+  const ideas=[...new Set(wantTags.map(t=>dcIdeas[t]).filter(Boolean))].slice(0,3);
+  if(ideas.length) steps.push(`To get ahead on this path, ask your counselor about <strong>${ideas.map(esc).join(", ")}</strong>.`);
+  if(o.zn<=3 && !p.deg) steps.push(`Ask whether your high school's CTE program offers an industry certification or a pre-apprenticeship for this field.`);
+  steps.push(`Questions for the program or admissions office: Which of my AP or dual credit courses will you accept? What prerequisites do I need before applying? Is there a waitlist or a competitive application?`);
+  $("nextCard").innerHTML = `<div class="panel-head"><h2>Next steps</h2></div><ul class="plain">${steps.map(s=>`<li>${s}</li>`).join("")}</ul>`;
+  renderPrintCourses();
+}
+
+function renderSources(){
+  $("sources").innerHTML = O.map(o=>`<li><a href="https://www.onetonline.org/link/summary/${o.soc}" target="_blank" rel="noopener">O*NET ${o.soc} · ${esc(o.n)}</a></li>`).join("") +
+   `<li><a href="https://capitol.texas.gov/tlodocs/84R/analysis/html/HB01992H.htm" target="_blank" rel="noopener">Texas HB 1992 (2015): AP credit at a score of 3</a></li>
+    <li><a href="https://catalog.tccd.edu/academics/corecurriculum" target="_blank" rel="noopener">Texas Core Curriculum component areas</a></li>`;
+}
+
+/* Course list that only shows on the printed report */
+function renderPrintCourses(){
+  const names = Object.keys(S.sel).filter(id=>byId[id]).map(id=>{
+    const c=byId[id], sc=S.sel[id].score;
+    return esc(c.n) + (c.t==="AP" && sc ? ` (score ${sc})` : "");
+  });
+  const today = new Date().toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
+  $("printCourses").innerHTML = `<div class="panel-head"><h2>Coursework used for this report</h2><span class="hint">${esc(today)}</span></div>
+    <p>${names.length ? names.join(", ") : "No courses selected."}</p>`;
+}
+$("printBtn").addEventListener("click",()=>window.print());
+
+function renderAll(){ renderGroups(); renderReport(); }
+renderOccSelect(); renderSources(); renderAll();
+
+</script>
+</body>
+</html>
