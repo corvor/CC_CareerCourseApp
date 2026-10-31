@@ -1,15 +1,32 @@
 {
-  // Terminal > Run Task... > "Run app (Python)" if you'd rather not install Live Server.
-  // Then open http://localhost:8000 in your browser. Stop it with Ctrl+C in the terminal.
+  // Terminal > Run Task... to use these. Or type the same npm commands in the terminal.
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Run app (Python)",
-      "type": "shell",
-      "command": "python -m http.server 8000",
-      "windows": { "command": "py -m http.server 8000" },
-      "options": { "cwd": "${workspaceFolder}/App" },
+      "label": "1. Install packages (first time)",
+      "type": "npm",
+      "script": "install",
+      "problemMatcher": []
+    },
+    {
+      "label": "2. Start app (dev server)",
+      "type": "npm",
+      "script": "dev",
       "isBackground": true,
+      "problemMatcher": [],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "Run tests",
+      "type": "npm",
+      "script": "test",
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "Build for hosting (creates dist/)",
+      "type": "npm",
+      "script": "build",
       "problemMatcher": []
     }
   ]

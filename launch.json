@@ -1,0 +1,20 @@
+{
+  // Run and Debug > "Debug in Chrome" after starting the dev server (npm run dev).
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug in Chrome",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "msedge",
+      "request": "launch",
+      "name": "Debug in Edge",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}

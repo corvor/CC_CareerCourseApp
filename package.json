@@ -1,0 +1,24 @@
+{
+  "name": "cc-course-career-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Career Connections Course-to-Career Pathfinder: compares high school coursework with O*NET occupation requirements.",
+  "type": "module",
+  "engines": {
+    "node": ">=18.18"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/pathfinder.test.js"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}

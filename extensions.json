@@ -1,6 +1,7 @@
 {
-  // VS Code will offer to install these when the folder is opened.
+  // VS Code offers to install these when the folder is opened. Both are optional.
   "recommendations": [
-    "ritwickdey.LiveServer"
+    "esbenp.prettier-vscode",
+    "dsznajder.es7-react-js-snippets"
   ]
 }

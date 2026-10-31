@@ -1,113 +1,93 @@
-# Course-to-Career Pathfinder
+# Course-to-Career Pathfinder (React)
 
 A Career Connections planning tool for high school students. A student pastes or selects the courses they've taken, picks an occupation, and gets a report showing:
 
-- **O\*NET requirements** for the occupation: Job Zone, education levels new hires need, and license or credential notes
-- **Knowledge match**: each O\*NET knowledge area for the job, marked *strong start*, *started*, or *not yet*, with the student's classes that built it or classes that would
-- **What comes after high school**: typical coursework for the training path (apprenticeship, certificate, associate, bachelor's, graduate)
-- **College credit they may already have**: AP and dual credit mapped to Texas common course numbers and the 42-hour Texas Core Curriculum
-- **Next steps** and questions to bring to an advisor
-- A **print / save as PDF** report for counselor meetings
+- **O\*NET requirements**: Job Zone, education levels new hires need, licenses and credentials
+- **Knowledge match**: each O\*NET knowledge area for the job, marked *strong start*, *started*, or *not yet*
+- **What comes after high school**: typical coursework for the training path
+- **College credit they may already have**: AP and dual credit mapped to Texas common course numbers and the Texas Core Curriculum
+- **Next steps**, plus a print / save-as-PDF report
 
-It is a static website: plain HTML, CSS, and JavaScript. There is **no build step, no server code, no database, and no login**. Student entries are saved only in that student's own browser (`localStorage`) and are never sent anywhere.
-
----
-
-## Files
-
-```
-career-pathfinder/
-├── index.html               Page structure
-├── vercel.json              Vercel settings and security headers
-├── css/
-│   ├── brand.css            ← Brand colors and fonts (the only file to edit for styling)
-│   └── app.css              Layout and components
-├── js/
-│   ├── data-courses.js      High school course catalog and how each maps to O*NET knowledge areas
-│   ├── data-occupations.js  Occupations: O*NET data plus typical training paths
-│   └── app.js               App logic
-├── assets/
-│   ├── favicon.svg          Browser tab icon
-│   └── LOGO-GOES-HERE.md    Where to put the official logo (logo.svg)
-└── docs/
-    └── UPDATING-DATA.md     How to add occupations and courses
-```
+**Stack:** React 19 + Vite 5, running on Node.js 18.18 or newer (22 recommended). There's no backend, database, or login. Student entries stay in their own browser (`localStorage`).
 
 ---
 
-## Deploy: GitHub + Vercel (both free)
-
-### 1. Put the code on GitHub
-1. Sign in at https://github.com and click **New repository**.
-2. Name it, for example `career-pathfinder`. Public or private both work with Vercel Hobby.
-3. Upload the contents of this folder (drag the files into **Add file → Upload files**, or use git):
-   ```bash
-   cd career-pathfinder
-   git init
-   git add .
-   git commit -m "Course-to-Career Pathfinder"
-   git branch -M main
-   git remote add origin https://github.com/<your-org>/career-pathfinder.git
-   git push -u origin main
-   ```
-   `index.html` must be at the top level of the repository, not inside a subfolder.
-
-### 2. Connect Vercel
-1. Sign in at https://vercel.com with the GitHub account.
-2. Click **Add New → Project** and import the `career-pathfinder` repository.
-3. Settings:
-   - **Framework Preset:** Other
-   - **Build Command:** leave empty
-   - **Output Directory:** leave empty (the repository root)
-   - **Install Command:** leave empty
-4. Click **Deploy**. Vercel gives you a URL like `career-pathfinder.vercel.app`.
-
-Every push to `main` redeploys automatically. Pull requests get their own preview URL.
-
-### 3. Custom domain (optional)
-In the Vercel project, open **Settings → Domains** and add something like `pathfinder.yourdomain.com`. Vercel shows the DNS record to create.
-
-> **Plan note:** Vercel's Hobby plan is meant for personal, non-commercial use. If this runs under a company account or company domain, check Vercel's current terms; the Pro plan may be required. GitHub Pages, Netlify, and Cloudflare Pages also host static sites like this one with no code changes.
-
----
-
-## Run it locally
-
-No install needed. Any static file server works:
+## Quick start
 
 ```bash
-cd career-pathfinder
-python3 -m http.server 8000
-# open http://localhost:8000
+npm install      # first time only
+npm run dev      # opens http://localhost:5173 and reloads as you edit
 ```
 
-Opening `index.html` directly from disk also works in most browsers.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Local development server with hot reload |
+| `npm test` | Runs the logic and data-integrity tests (Node's built-in test runner) |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serves the `dist/` build locally to check it before deploying |
+
+In VS Code: **Terminal → Run Task…** has the same commands, and **Run and Debug → Debug in Chrome/Edge** attaches the debugger.
+
+Commit the `package-lock.json` that `npm install` creates, so every machine installs the same versions.
 
 ---
 
-## Branding
+## Project layout
 
-- **Colors and fonts:** edit `css/brand.css`. The current values are placeholders. Replace them with Diamondback Energy's official brand values. Dark-mode values are in the same file.
-- **Logo:** add `assets/logo.svg` (see `assets/LOGO-GOES-HERE.md`). Until it exists, the header shows a text wordmark.
-- **Fonts** load from Google Fonts. To use the company typeface instead, change the `<link>` in `index.html` and the `--f-` variables in `brand.css`.
-- Confirm the use of the Diamondback name and logo with Corporate Communications before launch.
+```
+├── index.html                 Vite entry page (fonts, meta tags)
+├── package.json               Scripts and dependencies
+├── vite.config.js             Build settings (base "./" so it works from any folder)
+├── src/
+│   ├── main.jsx               Mounts the app
+│   ├── App.jsx                Page layout and state (selected courses, occupation, AP scores)
+│   ├── components/            One file per section of the page
+│   │   ├── BrandHeader.jsx      Logo band
+│   │   ├── CourseInput.jsx      Paste box and matching
+│   │   ├── CoursePicker.jsx     Course chips by subject
+│   │   ├── ApScores.jsx         AP score pickers
+│   │   ├── OccupationPicker.jsx Occupation menu and print button
+│   │   ├── OccupationCard.jsx   O*NET summary
+│   │   ├── KnowledgeMatch.jsx   Knowledge areas vs. coursework
+│   │   ├── PathCard.jsx         Training after high school
+│   │   ├── CreditCard.jsx       AP/dual credit and Texas Core
+│   │   ├── NextSteps.jsx        Recommendations
+│   │   ├── PrintCourses.jsx     Course list on the printed report
+│   │   └── SiteFooter.jsx       Attribution and sources
+│   ├── data/
+│   │   ├── courses.js           High school course catalog → O*NET knowledge areas
+│   │   └── occupations.js       Occupations: O*NET data + typical training paths
+│   ├── lib/
+│   │   ├── pathfinder.js        All matching and scoring logic (pure functions)
+│   │   └── useStoredState.js    useState that saves to localStorage
+│   └── styles/
+│       ├── brand.css            ← Brand colors and fonts
+│       └── app.css              Layout and components
+├── public/                    Copied as-is into the build
+│   ├── favicon.svg
+│   ├── _headers                 Security headers (Cloudflare Pages, Netlify)
+│   └── staticwebapp.config.json Security headers (Azure Static Web Apps)
+├── netlify.toml               Netlify build settings
+├── tests/pathfinder.test.js   Logic and data tests
+├── .github/workflows/ci.yml   Runs tests + build on every push (GitHub Actions)
+└── docs/
+    ├── DEPLOYMENT.md            Hosting options for a work project
+    ├── UPDATING-DATA.md         Adding occupations and courses
+    └── BRANDING.md              Colors, fonts, logo
+```
 
 ---
 
-## Security and privacy
+## Deploying
 
-- No data leaves the student's browser. There are no forms, accounts, analytics, or API calls.
-- `vercel.json` sets a Content Security Policy that only allows the site's own scripts plus Google Fonts.
-- If you add analytics (for example Vercel Web Analytics), update the CSP in `vercel.json` to allow it, and review student-privacy requirements (FERPA, district policy) first.
-- To block the site from being embedded in other websites, add `frame-ancestors 'self'` to the CSP. To embed it in a company page, add that page's domain instead.
+`npm run build` produces a static `dist/` folder that any web host can serve. Vercel's free Hobby plan is for non-commercial use, so for a company project see **docs/DEPLOYMENT.md**. It has step-by-step setup for:
+
+- **Azure Static Web Apps**, a good fit if the company already uses Microsoft 365 or Azure
+- **Netlify** and **Cloudflare Pages**, whose free plans allow commercial use
+- **The company's own web server** (IIS, Apache, nginx, SharePoint-hosted files): just copy `dist/`
 
 ---
 
-## Data sources and attribution
+## Data and attribution
 
-- Occupation requirements come from **O\*NET OnLine** (U.S. Department of Labor, Employment and Training Administration), used under the **CC BY 4.0** license. The attribution line in the page footer must stay.
-- AP credit note: Texas HB 1992 (2015) — public institutions can't require more than a 3 for lower-division credit unless the chief academic officer justifies a higher score.
-- Texas Core Curriculum: 42 semester credit hours in nine component areas, transferable as a block between Texas public institutions.
-- Course-to-knowledge mapping, typical training paths, and college course equivalents are **planning estimates**, and the page says so. Have a counselor review them each school year. See `docs/UPDATING-DATA.md`.
-
-O\*NET data was pulled in October 2026. O\*NET updates its database a few times a year; re-check the profiles annually.
+Occupation requirements come from **O\*NET OnLine** (USDOL/ETA), used under **CC BY 4.0**. The attribution and modification notice in `SiteFooter.jsx` are required by that license, so keep them. Course matching, training paths, and college course equivalents are planning estimates, and the page labels them that way. O\*NET data was pulled in October 2026; see **docs/UPDATING-DATA.md** for the yearly review.

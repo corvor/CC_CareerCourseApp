@@ -1,77 +1,98 @@
-# CC_CourseCareerApp — Course-to-Career Pathfinder
+# CC_CourseCareerApp: Course-to-Career Pathfinder
 
-Career Connections planning tool. High school students enter their coursework, pick an occupation, and see O\*NET requirements, which knowledge areas they've started, the training they'd take after high school, and AP or dual credit that may already count.
+Career Connections planning tool, built in **React with Node.js**. High school students enter their coursework, pick an occupation, and see O\*NET requirements, which knowledge areas they've started, the training they'd take after high school, and AP or dual credit that may already count.
 
 ## What's in this folder
 
 | Folder | What it is | Who it's for |
 |---|---|---|
-| **Demo/** | `CourseCareerApp-Demo.html`, the whole app in one file | Anyone. Double-click to try it. |
-| **App/** | Full source code, ready for GitHub and Vercel | IT / developers |
+| **App/** | The React + Node project. This is what goes in your git repo. | You, IT, developers |
+| **Demo/** | `CourseCareerApp-Demo.html`, a built copy of the app in one file | Anyone. Double-click to try it. |
 | **Mockups/** | Screenshots at desktop and phone sizes, light and dark mode | Review and presentations |
-| **.vscode/** | VS Code settings so the app runs with one click | Anyone using VS Code |
 
 ---
 
-## 1. Run the demo (no setup)
+## 1. Try the demo (no setup)
 
-1. Unzip `CC_CourseCareerApp.zip` (right-click → **Extract All** on Windows, double-click on Mac).
-2. Open the **Demo** folder.
-3. Double-click **CourseCareerApp-Demo.html**. It opens in your web browser.
-
-It works offline. With an internet connection it also loads the web fonts; without one, it uses your computer's fonts.
-
-Things to try:
-- Click **Start with my own**, paste a course list into the box, and click **Match my courses**.
-- Change the **Occupation** menu: try Electricians, Registered Nurses, or Petroleum Engineers.
-- Select an AP course, then pick a score under **AP exam scores** and watch the college credit section update.
-- Click **Print or save as PDF** to see the student report.
-
-Your selections are saved in your own browser only. **Clear all** resets them.
+Open **Demo** and double-click **CourseCareerApp-Demo.html**. It runs in your browser with nothing to install, and works offline.
 
 ---
 
-## 2. Open and run the full app in VS Code
+## 2. Run the React app in VS Code
 
-1. Install VS Code if needed: https://code.visualstudio.com
-2. In VS Code: **File → Open Folder…** and choose the **CC_CourseCareerApp** folder (the whole folder, not just App).
-3. If VS Code asks whether you trust the authors, click **Yes**.
-4. A pop-up offers to install the recommended extension, **Live Server**. Click **Install**.
-   (Or open the Extensions panel, search "Live Server" by Ritwick Dey, and install it.)
-5. Click **Go Live** in the blue status bar at the bottom right. The app opens at `http://127.0.0.1:5500`.
-6. Edit any file in **App/** and save. The browser refreshes on its own.
+**One-time setup:** install **Node.js 22 LTS** from https://nodejs.org (choose the LTS version). To check it worked, open a terminal and run `node -v`. You should see `v22` or higher (anything from 18.18 up works).
 
-**No Live Server?** Use the built-in task instead: **Terminal → Run Task… → Run app (Python)**, then open http://localhost:8000. This needs Python installed.
+1. In VS Code: **File → Open Folder…** and choose the **App** folder.
+2. Open a terminal: **Terminal → New Terminal**.
+3. Install packages (first time only, takes a minute):
+   ```bash
+   npm install
+   ```
+4. Start the app:
+   ```bash
+   npm run dev
+   ```
+   Your browser opens to http://localhost:5173. Edit any file in `src/`, save, and the page updates right away.
+5. Stop the app with **Ctrl+C** in the terminal.
 
-**Simplest option:** double-click `App/index.html`. The app runs straight from the file too.
+The same commands are under **Terminal → Run Task…** if you prefer menus.
 
-### Where to make common changes
+Other commands:
+| Command | What it does |
+|---|---|
+| `npm test` | Checks the matching logic and the data files |
+| `npm run build` | Creates the `dist/` folder to put on a web host |
+| `npm run preview` | Shows the `dist/` build locally before deploying |
+
+**If `npm install` fails on a work laptop**, the company network may block the npm registry. Ask IT to allow `registry.npmjs.org` or to point npm at the company's package mirror.
+
+---
+
+## 3. Add it to your git project
+
+Copy **everything inside App/** (including the hidden `.gitignore`, `.github`, and `.vscode` items) into the root of your repository. Then:
+
+```bash
+npm install
+git add .
+git commit -m "Add Course-to-Career Pathfinder (React)"
+git push
+```
+
+`node_modules/` and `dist/` are already in `.gitignore`. **Do commit `package-lock.json`** (created by `npm install`) so everyone gets the same package versions.
+
+GitHub Actions (`.github/workflows/ci.yml`) runs the tests and a build on every push.
+
+---
+
+## 4. Hosting for a work project
+
+Vercel's free plan is for non-commercial use only. `App/docs/DEPLOYMENT.md` has step-by-step setup for options that suit a company:
+- **Azure Static Web Apps**, the best fit if Diamondback uses Microsoft 365 or Azure
+- **Netlify** or **Cloudflare Pages**, whose free plans allow commercial use
+- **Diamondback's own web server**: run `npm run build` and copy the `dist/` folder
+
+Config files for Azure, Netlify, and Cloudflare are already included.
+
+---
+
+## Where to make common changes
+
 | Change | File |
 |---|---|
-| Brand colors and fonts | `App/css/brand.css` |
-| Logo | add `App/assets/logo.svg` (see `App/assets/LOGO-GOES-HERE.md`) |
-| Add or edit occupations | `App/js/data-occupations.js` |
-| Add or edit high school courses | `App/js/data-courses.js` |
-| Step-by-step data guide | `App/docs/UPDATING-DATA.md` |
-
-The Demo file is a snapshot. After you change files in App, the demo doesn't update; share the App folder (or the live site) instead.
-
----
-
-## 3. Put it online (for IT)
-
-Push the **contents of the App folder** to a GitHub repository, then import that repository into Vercel with all build settings left blank. Full steps, security notes, and plan details are in **App/README.md**.
-
----
+| Brand colors and fonts | `App/src/styles/brand.css` |
+| Logo | add `App/public/logo.svg` (see `App/docs/BRANDING.md`) |
+| Occupations | `App/src/data/occupations.js` |
+| High school courses | `App/src/data/courses.js` |
+| Matching and scoring logic | `App/src/lib/pathfinder.js` |
+| Page sections | `App/src/components/` |
 
 ## Before launch
+- [ ] Official brand colors and logo
+- [ ] Corporate Communications approval for the Diamondback name and logo
+- [ ] Counselor review of courses and training paths
+- [ ] Hosting option chosen with IT
 
-- [ ] Replace the placeholder colors in `App/css/brand.css` with Diamondback Energy's official brand values
-- [ ] Add the official logo as `App/assets/logo.svg`
-- [ ] Get Corporate Communications approval for using the Diamondback name and logo
-- [ ] Have a counselor review the course list and training paths
-- [ ] Confirm the hosting plan (Vercel Hobby is for non-commercial use; see App/README.md)
+The Demo file is a snapshot. It doesn't change when you edit `App/`.
 
-## Data sources
-
-Occupation requirements come from O\*NET OnLine (U.S. Department of Labor, Employment and Training Administration), used under CC BY 4.0. Course matching, training paths, and college credit equivalents are planning estimates and are labeled that way in the app. O\*NET data was pulled October 2026.
+Occupation data comes from O\*NET OnLine (USDOL/ETA), used under CC BY 4.0, pulled October 2026.

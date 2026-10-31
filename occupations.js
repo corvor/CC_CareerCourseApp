@@ -1,0 +1,103 @@
+/* Occupation data. Fields marked O*NET come from O*NET OnLine profile pages
+   (https://www.onetonline.org/link/summary/<SOC>). path is a planning estimate.
+   See App/docs/UPDATING-DATA.md before editing. */
+/* ---------- Occupations (O*NET OnLine) ----------
+   k: knowledge areas in O*NET's listed order (imp = importance score where shown on the Details page).
+   path: typical post-high-school coursework — planning estimate, not O*NET. */
+const O = [
+ {soc:"47-5071.00",n:"Roustabouts, Oil and Gas",z:"1–2",zn:2,d:"Assembles or repairs oil field equipment using hand and power tools.",
+  edu:[["High school diploma or equivalent",null],["Less than high school diploma",null]],k:["ME","CPS"],
+  cred:"No license listed by O*NET. Employers commonly require oilfield safety training before you start.",
+  path:{type:"On-the-job training",len:"Weeks to months",deg:false,items:[["Oilfield safety orientation"],["H2S (hydrogen sulfide) awareness training"],["Equipment, rigging, and hand-tool basics"],["CDL, for some driving roles"]]}},
+ {soc:"51-4121.00",n:"Welders, Cutters, Solderers, and Brazers",z:"1–2",zn:2,d:"Joins metal parts or fills gaps and seams using hand welding, flame cutting, soldering, or brazing equipment.",
+  edu:[["High school diploma or equivalent",54],["Less than high school diploma",21],["Post-secondary certificate",12]],k:["PP","ME"],
+  cred:"O*NET lists DOL-approved registered apprenticeship titles such as Welder and Welder-Fitter.",
+  path:{type:"Certificate or apprenticeship",len:"6–12 months",deg:false,items:[["SMAW (stick) welding"],["GMAW / FCAW (MIG and flux-core)"],["GTAW (TIG) welding"],["Blueprint reading and weld symbols"],["Metallurgy basics"],["Welding certification tests (AWS)"]]}},
+ {soc:"47-2111.00",n:"Electricians",z:"3",zn:3,d:"Installs, maintains, and repairs electrical wiring, equipment, and fixtures to code.",
+  edu:[["Post-secondary certificate",62],["High school diploma or equivalent",31],["Less than high school diploma",2]],
+  k:[["BC",67],["AM",65],["ME",61],["MA",60],["DE",58],["CPS",54],["PSS",47],["PS",42]],
+  cred:"O*NET notes a 3–4 year apprenticeship or vocational training, and often a licensing exam. In Texas, electricians are licensed through TDLR.",
+  path:{type:"Registered apprenticeship or vocational program",len:"3–4 years, paid on the job",deg:false,items:[["Electrical theory and circuits"],["National Electrical Code (NEC)"],["Applied math: algebra and trig for conduit bending"],["Blueprint reading"],["Job-site safety (OSHA)"],["State licensing exam"]]}},
+ {soc:"47-2152.00",n:"Plumbers, Pipefitters, and Steamfitters",z:"3",zn:3,d:"Installs, alters, and repairs pipe systems that carry water, steam, air, or gas.",
+  edu:[["Post-secondary certificate",43],["High school diploma or equivalent",35],["Associate's degree",9]],k:["BC","ME","DE","MA","CPS","AM","ET","PH"],
+  cred:"O*NET lists 16 DOL-approved apprenticeship titles, including Plumber and Pipe Fitter. In Texas, plumbers are licensed by the State Board of Plumbing Examiners.",
+  path:{type:"Registered apprenticeship",len:"4–5 years, paid on the job",deg:false,items:[["Plumbing code"],["Pipe systems, fitting, and joining"],["Blueprint reading"],["Applied math"],["Job-site safety"],["State licensing exam"]]}},
+ {soc:"49-9021.00",n:"HVAC and Refrigeration Mechanics and Installers",z:"3",zn:3,d:"Installs and repairs heating, central air conditioning, and refrigeration systems.",
+  edu:[["High school diploma or equivalent",null],["Post-secondary certificate",null]],k:["BC","CPS","ME","AM","ED","MA","PSS","AD"],
+  cred:"O*NET lists 14 DOL-approved apprenticeship titles. Handling refrigerants requires federal EPA Section 608 certification; Texas licenses ACR contractors through TDLR.",
+  path:{type:"Certificate or apprenticeship",len:"6 months–2 years",deg:false,items:[["Refrigeration principles"],["Electrical fundamentals and controls"],["Heating systems"],["Ductwork and load calculation"],["EPA Section 608 certification"]]}},
+ {soc:"49-3023.00",n:"Automotive Service Technicians and Mechanics",z:"3",zn:3,d:"Diagnoses, adjusts, repairs, or overhauls automotive vehicles.",
+  edu:[["Post-secondary certificate",32],["Less than high school diploma",30],["High school diploma or equivalent",26]],k:["ME","ET","CE","CPS","EN","MA"],
+  cred:"O*NET lists ASE (National Institute for Automotive Service Excellence) as the certifying body and 18 DOL-approved apprenticeship titles.",
+  path:{type:"Certificate or associate (AAS)",len:"1–2 years",deg:false,items:[["Engine repair and performance"],["Brakes, steering, and suspension"],["Electrical systems and diagnostics"],["Heating and air conditioning"],["ASE certification exams"]]}},
+ {soc:"49-3031.00",n:"Bus and Truck Mechanics and Diesel Engine Specialists",z:"3",zn:3,d:"Diagnoses, repairs, or overhauls buses and trucks, and maintains diesel engines.",
+  edu:[["Post-secondary certificate",39],["High school diploma or equivalent",37]],k:["ME","TR","ED","EN","PSS","CE","MA","AM"],
+  cred:"O*NET lists 11 DOL-approved apprenticeship titles.",
+  path:{type:"Certificate or associate (AAS)",len:"1–2 years",deg:false,items:[["Diesel engines"],["Hydraulics"],["Truck electrical systems"],["Air brake systems"],["Preventive maintenance"],["ASE certification exams"]]}},
+ {soc:"31-9092.00",n:"Medical Assistants",z:"3",zn:3,d:"Performs administrative and certain clinical duties under a physician's direction.",
+  edu:[["Post-secondary certificate",null],["High school diploma or equivalent",null],["Some college, no degree",null]],k:["EN","CPS","MD","AD","CE","ED","PSS","TC"],
+  cred:"O*NET lists Medical Assistant as a DOL-approved apprenticeship title. Several national certifications exist; employers often prefer one.",
+  path:{type:"Certificate program",len:"9–12 months",deg:false,items:[["Medical terminology"],["Anatomy and physiology basics"],["Clinical procedures: vitals, injections, phlebotomy"],["Medical office: scheduling, billing, coding"],["National certification exam"]]}},
+ {soc:"29-2061.00",n:"Licensed Practical and Licensed Vocational Nurses",z:"3",zn:3,d:"Cares for ill, injured, or recovering patients, often under a registered nurse's supervision.",
+  edu:[["Some college, no degree",38],["Post-secondary certificate",35],["Associate's degree",16]],k:["CPS","EN","PS","MD","AM","ED","TC","MA"],
+  cred:"Licensing is required (O*NET). In Texas the license is issued by the Texas Board of Nursing after the NCLEX-PN exam.",
+  path:{type:"Vocational nursing certificate",len:"12–18 months",deg:false,items:[["Anatomy & Physiology (often a prerequisite)"],["English Composition (some programs)","comp"],["College math (some programs)","math"],["Vocational nursing courses and clinicals"],["NCLEX-PN licensing exam"]]}},
+ {soc:"29-1292.00",n:"Dental Hygienists",z:"3",zn:3,d:"Provides oral hygiene care, assesses oral health, and advises on disease prevention.",
+  edu:[["Associate's degree",75],["Professional degree",13],["Post-baccalaureate certificate",9]],k:["MD","CPS","PS"],
+  cred:"A state license is required to practice; Texas also requires passing the national board exam.",
+  path:{type:"Associate degree (AAS)",len:"About 3 years with prerequisites",deg:true,items:[["English Composition","comp"],["College Algebra","math"],["General Chemistry","chem"],["General Psychology","psych"],["Sociology or Speech","soc"],["Anatomy & Physiology I and II"],["Microbiology"],["Dental hygiene clinicals, radiology, periodontics"],["National board exam and state license"]]}},
+ {soc:"33-3051.00",n:"Police and Sheriff's Patrol Officers",z:"3",zn:3,d:"Maintains order, enforces laws, patrols, and responds to emergencies.",
+  edu:[],k:[["LG",94],["PSS",94],["CPS",83],["EN",76],["PS",75],["ED",68],["CE",58],["GE",58]],
+  cred:"In Texas, officers complete the TCOLE Basic Peace Officer Course and pass the state licensing exam.",
+  path:{type:"Police academy (college hours often preferred)",len:"About 6 months of academy",deg:false,items:[["Basic Peace Officer Course"],["Penal code and criminal procedure"],["Firearms, defensive tactics, and driving"],["Report writing"],["State licensing exam"],["College hours in criminal justice or psychology (some departments)","psych"]]}},
+ {soc:"15-1232.00",n:"Computer User Support Specialists",z:"3",zn:3,d:"Gives technical help to computer users in person, by phone, or online.",
+  edu:[["Bachelor's degree",null],["Post-secondary certificate",null],["Associate's degree",null]],k:["CE","CPS","TE","EN","ED","ME","ET","AM"],
+  cred:"O*NET lists 9 DOL-approved apprenticeship titles, such as Help Desk Technician. Entry-level IT certifications are common.",
+  path:{type:"Certificate or associate (AAS)",len:"6 months–2 years",deg:false,items:[["Intro to computing","cs0"],["Computer hardware and operating systems"],["Networking fundamentals"],["Help-desk customer service"],["Industry certification such as CompTIA A+"]]}},
+ {soc:"29-1141.00",n:"Registered Nurses",z:"4",zn:4,d:"Assesses patients, plans and carries out nursing care, and keeps medical records.",
+  edu:[["Bachelor's degree",null],["Associate's degree",null],["Post-secondary certificate",null]],
+  k:[["PS",90],["CPS",85],["MD",84],["EN",80],["AD",64],["MA",61],["TC",61],["AM",57]],
+  cred:"Licensing or registration is required (O*NET). In Texas the license comes from the Texas Board of Nursing after the NCLEX-RN exam.",
+  path:{type:"Associate (ADN) or bachelor's (BSN)",len:"2–4 years",deg:true,items:[["English Composition I and II","comp"],["College Algebra or Statistics","math"],["General Psychology","psych"],["Chemistry (many BSN programs)","chem"],["Anatomy & Physiology I and II"],["Microbiology"],["Lifespan Growth & Development"],["Nursing courses: fundamentals, pharmacology, clinical rotations"],["NCLEX-RN licensing exam"]]}},
+ {soc:"15-1252.00",n:"Software Developers",z:"4",zn:4,d:"Researches, designs, and develops computer software, and updates existing programs.",
+  edu:[["Bachelor's degree",85],["Associate's degree",5],["Master's degree",5]],k:["CE","CPS","MA","EN"],
+  cred:"No license required. O*NET lists DOL-approved apprenticeship titles such as Software Developer.",
+  path:{type:"Bachelor's in Computer Science or Software Engineering",len:"4 years",deg:true,items:[["Programming I and II","cs"],["Calculus I and II","calc"],["English Composition","comp"],["Physics (many programs)","phys"],["Discrete math"],["Data structures and algorithms"],["Databases, systems, software engineering"]]}},
+ {soc:"17-2141.00",n:"Mechanical Engineers",z:"4",zn:4,d:"Designs tools, engines, and machines, and oversees their installation and operation.",
+  edu:[["Bachelor's degree",52],["Associate's degree",29],["Post-secondary certificate",9]],k:["DE","ET","PP","ME","EN","MA","PSS","CE"],
+  cred:"A PE (Professional Engineer) license is needed to sign off on some work; the path starts with the FE exam near graduation.",
+  path:{type:"Bachelor's in Mechanical Engineering",len:"4 years",deg:true,items:[["Calculus I–III and differential equations","calc"],["Physics I and II (calculus-based)","phys"],["General Chemistry","chem"],["English Composition","comp"],["Statics, dynamics, thermodynamics"],["CAD and design projects"],["FE exam"]]}},
+ {soc:"17-2171.00",n:"Petroleum Engineers",z:"4",zn:4,d:"Designs methods to improve oil and gas extraction and oversees drilling.",
+  edu:[["Bachelor's degree",72]],k:["ET","MA","CE","PH","CH"],
+  cred:"A PE license is common for senior roles; the FE exam comes first.",
+  path:{type:"Bachelor's in Petroleum Engineering",len:"4 years",deg:true,items:[["Calculus I–III and differential equations","calc"],["Physics I and II (calculus-based)","phys"],["General Chemistry","chem"],["English Composition","comp"],["Geology"],["Drilling, reservoir, and production engineering"],["FE exam"]]}},
+ {soc:"25-2021.00",n:"Elementary School Teachers",z:"4",zn:4,d:"Teaches academic and social skills to elementary students.",
+  edu:[["Bachelor's degree",78],["Master's degree",22]],k:["EN","ED","MA","CPS","PS","TC","CE","PSS"],
+  cred:"Texas public schools require a Texas educator certificate, earned through a preparation program and state exams.",
+  path:{type:"Bachelor's plus educator certification",len:"4 years",deg:true,items:[["English Composition","comp"],["Math for teachers","math"],["US History","ushist"],["Government","gov"],["Child and adolescent development","psych"],["Reading and literacy methods"],["Student teaching"],["State certification exams"]]}},
+ {soc:"13-2011.00",n:"Accountants and Auditors",z:"4",zn:4,d:"Prepares and audits financial statements and sets up budget tracking systems.",
+  edu:[["Bachelor's degree",69],["Associate's degree",7],["Post-baccalaureate certificate",7]],k:["EA","EN","MA","LG","AM","CPS","AD","CE"],
+  cred:"Becoming a CPA has extra education, exam, and experience requirements; check the Texas State Board of Public Accountancy.",
+  path:{type:"Bachelor's in Accounting",len:"4 years, more for CPA",deg:true,items:[["Macro and microeconomics","econ"],["Business statistics","stats"],["English Composition","comp"],["Financial and managerial accounting"],["Business law"],["Intermediate accounting, tax, auditing"],["CPA exam"]]}},
+ {soc:"27-1024.00",n:"Graphic Designers",z:"4",zn:4,d:"Creates graphics such as packaging, displays, and logos for business or promotion.",
+  edu:[["Bachelor's degree",65],["High school diploma or equivalent",15],["Master's degree",10]],k:["DE","CE","FA","CM","EN"],
+  cred:"No license required. A strong portfolio matters most when applying.",
+  path:{type:"Bachelor's in design (BFA or BA)",len:"4 years",deg:true,items:[["English Composition","comp"],["Design fundamentals and color"],["Typography"],["Digital imaging and layout software"],["Art and design history"],["Portfolio review"]]}},
+ {soc:"29-1123.00",n:"Physical Therapists",z:"5",zn:5,d:"Plans and carries out rehabilitation to improve mobility, relieve pain, and build strength.",
+  edu:[],k:[["CPS",90],["TC",90],["MD",89],["PS",78]],
+  cred:"O*NET Job Zone 5: most of these jobs require graduate school. Physical therapists earn a Doctor of Physical Therapy and pass a national licensing exam.",
+  path:{type:"Bachelor's, then Doctor of Physical Therapy (DPT)",len:"About 7 years",deg:true,items:[["Biology I and II","bio"],["Chemistry I and II","chem"],["Physics I and II","phys"],["General Psychology","psych"],["Statistics","stats"],["Anatomy & Physiology I and II"],["DPT program with clinical rotations"],["National licensing exam"]]}}
+];
+const ZONE_TEXT = {
+ 2:"Usually requires a high school diploma or GED, though some jobs may not.",
+ 3:"Most jobs require vocational school, related on-the-job experience, or an associate's degree.",
+ 4:"Most of these jobs require a four-year bachelor's degree, but some do not.",
+ 5:"Most of these jobs require graduate school."
+};
+const CORE = [["Communication",6],["Mathematics",3],["Life & Physical Sciences",6],["Language, Philosophy & Culture",3],["Creative Arts",3],["American History",6],["Government/Political Science",6],["Social & Behavioral Sciences",3],["Component Area Option",6]];
+const TAG_NAMES = {comp:"English Composition",math:"College math",calc:"Calculus",stats:"Statistics",bio:"Biology",chem:"Chemistry",phys:"Physics",psych:"Psychology",soc:"Social science",econ:"Economics",ushist:"US History",gov:"Government",cs:"Programming",cs0:"Intro to computing",envsci:"Environmental science"};
+
+/* Suggested AP or dual credit course for each path tag (used in Next steps) */
+const TAG_IDEAS = {comp:"Dual Credit English",math:"Dual Credit College Algebra",calc:"AP Calculus",psych:"AP Psychology",chem:"AP Chemistry",bio:"AP Biology",phys:"AP Physics",ushist:"Dual Credit US History",gov:"Dual Credit Government",stats:"AP Statistics",econ:"AP Macroeconomics",cs:"AP Computer Science A",cs0:"AP Computer Science Principles",soc:"AP Human Geography"};
+
+export { O as OCCUPATIONS, ZONE_TEXT, CORE as TEXAS_CORE, TAG_NAMES, TAG_IDEAS };

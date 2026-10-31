@@ -143,3 +143,12 @@ ul.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;f
   .strip,.pill,.core-bar,.edu-bar,.zone-meter{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   a[href^="http"]::after{content:" (" attr(href) ")";font-size:9pt;color:#555}
 }
+
+/* React version additions */
+#root{min-height:100%}
+.score-row{display:contents}
+.fact-text{font-size:15px}
+.core-summary{gap:16px;align-items:baseline}
+.core-maybe{color:var(--mid)}
+.legend i.lg-have{background:var(--ok)}
+.legend i.lg-maybe{background:var(--mid);opacity:.55}
